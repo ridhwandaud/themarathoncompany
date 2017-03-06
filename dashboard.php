@@ -66,7 +66,6 @@ if($doLogout == "true") {
     <div style="clear:both;"></div>
     <hr class="colorgraph">
     <div class="form-group" style="margin-top:30px;">
-        <form action="" method="post">
 			<h3>Type:</h3>
 			<div class="select-style" style="margin-top: 10px;">
                  <select id="select-type">
@@ -86,13 +85,12 @@ if($doLogout == "true") {
             <div class="row-enter" style="margin-top:20px;">
 				<div class="bg-danger" id="errMsg" style="display: none;color: #e26a6a;font-size: 16px;margin-bottom:20px;"></div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                  <input id="btnSearch" type="button" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
+                  <input id="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                   <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
                 </div>
             </div>
-        </form>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div id="loadAct" class="spinner" style="display:none;">
                 <div class="rect1"></div>
@@ -134,6 +132,12 @@ if($doLogout == "true") {
     /** Global Vars **/
     var gIcNo = 0;
     $(document).ready(function () {
+
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+                clickOrEnter(); 
+            }
+        });
         
         $('#icno').keypress(function (e) {
             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
@@ -145,32 +149,39 @@ if($doLogout == "true") {
         });
         
         $('#btnSearch').click(function() {
-			var type = $('#select-type').val();
-			var bContinue = false;
-			var parameter = "";
-			var value = "";
-			var statusColor = "";
-			//Validate
-			if(type === "I") {
-				if ($.trim($('#icNo').val()) == '') {
-					$('#errMsg').html("Ic No cannot be blank.").show().fadeOut(3000);
-				} else {
-					bContinue = true;
-					value = $.trim($('#icNo').val());
-					parameter = "icNo";
-				}	
-			} 
+		  
+          clickOrEnter();	
 
-			if(type === "C"){
-				if ($.trim($('#confirmationNo').val()) == '') {
-					$('#errMsg').html("Confirmation No cannot be blank.").show().fadeOut(3000);
-				} else {
-					bContinue = true;
-					value = $.trim($('#confirmationNo').val());
-					parameter = "confirmNo";
-				}
-			}
-			
+        });
+
+        function clickOrEnter() {
+
+            var type = $('#select-type').val();
+            var bContinue = false;
+            var parameter = "";
+            var value = "";
+            var statusColor = "";
+            //Validate
+            if(type === "I") {
+                if ($.trim($('#icNo').val()) == '') {
+                    $('#errMsg').html("Ic No cannot be blank.").show().fadeOut(3000);
+                } else {
+                    bContinue = true;
+                    value = $.trim($('#icNo').val());
+                    parameter = "icNo";
+                }   
+            } 
+
+            if(type === "C"){
+                if ($.trim($('#confirmationNo').val()) == '') {
+                    $('#errMsg').html("Confirmation No cannot be blank.").show().fadeOut(3000);
+                } else {
+                    bContinue = true;
+                    value = $.trim($('#confirmationNo').val());
+                    parameter = "confirmNo";
+                }
+            }
+            
             if(bContinue) {
                 /* Just in case, hide again*/
                 $('#result').html('');
@@ -192,14 +203,14 @@ if($doLogout == "true") {
                             $('#loadAct').hide();
                             $('#errMsg').html("Record not found. Please try again").show().fadeOut(2500);
                         } else if (response.statuscode == 200) { //data available
-							$('#loadAct').hide();
-							var data = response.data;
-							gIcNo = data.icNo;
-							if(data.status == "N") {
-								statusColor = "#b78006;";
-								sStatus = "Pending Collection";
-								$('#colSelf').show();
-								$('#result').html(
+                            $('#loadAct').hide();
+                            var data = response.data;
+                            gIcNo = data.icNo;
+                            if(data.status == "N") {
+                                statusColor = "#b78006;";
+                                sStatus = "Pending Collection";
+                                $('#colSelf').show();
+                                $('#result').html(
                             "<h3 style='color:#62C2E4;'>"+data.name+"</h3>"
                             +"<h4 style='margin-top: 20px;color: #F0776C;'>"+data.category+"</h4>"
                             +"<h1 style='margin-top: 40px;'><b>Confirmation ID:</b> "+data.confirmId+"</h1>"
@@ -215,32 +226,33 @@ if($doLogout == "true") {
                             +" <option value='S'>Self</option>"
                             +" <option value='B'>On Behalf</option>"
                             +"</select></h5>");
-							} else {
-								statusColor = "#04B431;";
-								sStatus = "Collected";
-								$('#result').html(
+                            } else {
+                                statusColor = "#04B431;";
+                                sStatus = "Collected";
+                                $('#result').html(
                                     "<h3 style='color:#62C2E4;'>"+data.name+"</h3>"
                                     +"<h4 style='margin-top: 20px;color: #F0776C;'>"+data.category+"</h4>"
                                     +"<h1 style='margin-top: 40px;'><b>Confirmation ID:</b> "+data.confirmId+"</h1>"
                                     +"<h1 style='margin-top: 5px;'><b>IC No:</b> "+data.icNo+"</h1>"
-									+"<h5 style='margin-top: 5px;'><b>Gender:</b> "+data.gender+"</h4>"
+                                    +"<h5 style='margin-top: 5px;'><b>Gender:</b> "+data.gender+"</h4>"
                                     +"<h1 style='margin-top: 5px;'><b>T-Shirt Size:</b> "+data.tShirtSize+"</h1>"
-									+"<h1 style='margin-top: 5px;'><b>Bib:</b> "+data.bib+"</h1>"
-									+"<h5 style='margin-top: 5px;'><b>Payment Bal:</b> RM "+data.paymentBalance+"</h5>"
+                                    +"<h1 style='margin-top: 5px;'><b>Bib:</b> "+data.bib+"</h1>"
+                                    +"<h5 style='margin-top: 5px;'><b>Payment Bal:</b> RM "+data.paymentBalance+"</h5>"
                                     +"<h1 id='txtCollectStatus' style='margin-top: 5px;'><b>Status:</b> <span style='color: "+statusColor+"'>"+sStatus+"</span></h1>"
-									+"<h5 style='margin-top: 5px;'><b>O/B Name:</b> "+data.obName+"</h5>"
-									+"<h5 style='margin-top: 5px;'><b>O/B IC:</b> "+data.obIc+"</h5>"
-									+"<h5 style='margin-top: 5px;'><b>O/B Contact:</b> "+data.obContact+"</h5>"
-									);
-							}
-									
+                                    +"<h5 style='margin-top: 5px;'><b>O/B Name:</b> "+data.obName+"</h5>"
+                                    +"<h5 style='margin-top: 5px;'><b>O/B IC:</b> "+data.obIc+"</h5>"
+                                    +"<h5 style='margin-top: 5px;'><b>O/B Contact:</b> "+data.obContact+"</h5>"
+                                    );
+                            }
+                                    
                             $('#result').show().fadeIn("fast");
                             $('#midBar').show().fadeIn("fast");
                         }
                     }
                 }); //End $.ajax({
             }//End if(bContinue)
-        });
+        
+        }
 		
 		
 		$(document).on('change', '#sCollectType', function() {
