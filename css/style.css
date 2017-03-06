@@ -1,0 +1,40 @@
+.frmTxt2 {
+	height: 50px;
+    width: 100%;
+    text-indent: 5px;
+    font-family: Trebuchet MS;
+    font-size: 14px;
+    color: #1C1C1C;
+    transition: border 0.3s;
+    /*border: none;*/
+    border: solid 1px #3992AA;
+    border-radius: 1px;
+	background: /*#f9f9f9*/ #ffffff;
+	margin-bottom: 5px;
+}
+
+.frmTxt {
+    height: 50px;
+    width: 100%;
+    text-indent: 5px;
+    font-family: Trebuchet MS;
+    font-size: 14px;
+    color: #1C1C1C;
+    transition: border 0.3s;
+    border: none;
+    border-bottom: solid 2px #3992AA;
+    border-radius: 1px;
+	background: #f9f9f9;
+	margin-bottom: 20px;
+}
+
+.none{
+    display: none;
+}
+
+.btn-danger-custom{
+    display: none;
+    color: #e26a6a;
+    font-size: 16px;
+    margin-bottom:20px;
+}

@@ -13,45 +13,10 @@ if($doLogout == "true") {
     echo "<script>window.location = 'index.php';</script>";
 }
 ?>
-<style type="text/css">
-.frmTxt2 {
-	height: 50px;
-    width: 100%;
-    text-indent: 5px;
-    font-family: Trebuchet MS;
-    font-size: 14px;
-    color: #1C1C1C;
-    transition: border 0.3s;
-    /*border: none;*/
-    border: solid 1px #3992AA;
-    border-radius: 1px;
-	background: /*#f9f9f9*/ #ffffff;
-	margin-bottom: 5px;
-}
 
-.frmTxt {
-    height: 50px;
-    width: 100%;
-    text-indent: 5px;
-    font-family: Trebuchet MS;
-    font-size: 14px;
-    color: #1C1C1C;
-    transition: border 0.3s;
-    border: none;
-    border-bottom: solid 2px #3992AA;
-    border-radius: 1px;
-	background: #f9f9f9;
-	margin-bottom: 20px;
-}
-</style>
-<div class="container">
-    <div class="cpy-logo-small" style="margin-top:10px;"></div>
-    <button data-toggle="modal" data-href="dashboard.php" data-target="#doLogout" style="float:right;margin-top:20px;" type="button" class="btn btn-primary btn-sm">Logout</button>
-    <div class="modal fade" id="doLogout" tab
-    
-    
-    
-    ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="cpy-logo-small" style="margin-top:10px;"></div>
+<button data-toggle="modal" data-href="dashboard.php" data-target="#doLogout" style="float:right;margin-top:20px;" type="button" class="btn btn-primary btn-sm">Logout</button>
+<div class="modal fade" id="doLogout" tab="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">Are you sure?</div>
@@ -63,64 +28,66 @@ if($doLogout == "true") {
         </div>
     </div>
 </div>
-    <div style="clear:both;"></div>
-    <hr class="colorgraph">
-    <div class="form-group" style="margin-top:30px;">
-			<h3>Type:</h3>
-			<div class="select-style" style="margin-top: 10px;">
-                 <select id="select-type">
-					<option value="I">Ic No</option>
-					<option value="C">Confirmation No</option>
-				</select>
-            </div>
-            <div id="search1">
-				<h3>Enter IC No:</h3>
-				<input type="text" name="icNo" id="icNo" class="form-control input-pincode" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
-				
-			</div>
-			<div id="search2" style="display:none;">
-				<h3>Enter Confirmation No:</h3>
-				<input type="text" name="confirmationNo" id="confirmationNo" class="form-control input-pincode" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
-				</div>
-            <div class="row-enter" style="margin-top:20px;">
-				<div class="bg-danger" id="errMsg" style="display: none;color: #e26a6a;font-size: 16px;margin-bottom:20px;"></div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                  <input id="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                  <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
-                </div>
-            </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div id="loadAct" class="spinner" style="display:none;">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
-            </div>
+<hr class="colorgraph">
+
+<div class="container">
+    <div class="form-group">
+		<label>Type:</label>
+
+         <select class="form-control form-block input-lg" id="select-type">
+			<option value="I">Ic No</option>
+			<option value="C">Confirmation No</option>
+		</select>
+    </div>        
+    <div class="form-group" id="search1">
+		<label>Enter IC No:</label>
+		<input type="text" name="icNo" id="icNo" class="form-control input-lg" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
+		
+	</div>
+	<div id="search2" class="form-group none">
+		<label>Enter Confirmation No:</label>
+		<input type="text" name="confirmationNo" id="confirmationNo" class="form-control input-lg" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
+	</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="bg-danger btn-danger-custom" id="errMsg"></div>
         </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <input id="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div id="loadAct" class="spinner" style="display:none;">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 100px;display:block;">
-            <hr class="colorgraph" id="midBar" style="display: none;">
-            <p class="bg-success" id="updtMsg" style="display: none;margin-top: 40px;">Record has been successfully updated.</p>
-            <div id="result" class="detailContrainer" style="display:none;"></div>
-            <div id="colSelf" style="display:none;">
-				<input style="margin-top: 40px;" id="collect" type="button" name="Collect" value="Collect Now" class="btn btn-lg btn-primary btn-block"> 
-			</div>
-			<div id="colOnbehalf" style="display:none;">
-				<div style='margin-top:30px;'></div>
-				<div class='txtTitle' style='color:#262829;font-size:13px;'>OB Name:</div>
-				<input type='text' name='sLastName' class='frmTxt' id='obName' style='width:100%;color:#1B6C87;height:25px;'>
-				<div class='txtTitle' style='color:#262829;font-size:13px;'>OB IC:</div>
-				<input type='text' name='sLastName' class='frmTxt' id='obIc' style='width:100%;color:#1B6C87;height:25px;'>
-				<div class='txtTitle' style='color:#262829;font-size:13px;'>OB Contact No:</div>
-				<input type='text' name='sLastName' class='frmTxt' id='obContact' style='width:100%;color:#1B6C87;height:25px;'>
-				<p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
-				<input style="margin-top: 40px;" id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block"> 			
-			</div>
-		</div>    
-    </div> 
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 100px;display:block;">
+        <hr class="colorgraph" id="midBar" style="display: none;">
+        <p class="bg-success" id="updtMsg" style="display: none;margin-top: 40px;">Record has been successfully updated.</p>
+        <div id="result" class="detailContrainer" style="display:none;"></div>
+        <div id="colSelf" style="display:none;">
+			<input style="margin-top: 40px;" id="collect" type="button" name="Collect" value="Collect Now" class="btn btn-lg btn-primary btn-block"> 
+		</div>
+		<div id="colOnbehalf" style="display:none;">
+			<div style='margin-top:30px;'></div>
+			<div class='txtTitle' style='color:#262829;font-size:13px;'>OB Name:</div>
+			<input type='text' name='sLastName' class='frmTxt' id='obName' style='width:100%;color:#1B6C87;height:25px;'>
+			<div class='txtTitle' style='color:#262829;font-size:13px;'>OB IC:</div>
+			<input type='text' name='sLastName' class='frmTxt' id='obIc' style='width:100%;color:#1B6C87;height:25px;'>
+			<div class='txtTitle' style='color:#262829;font-size:13px;'>OB Contact No:</div>
+			<input type='text' name='sLastName' class='frmTxt' id='obContact' style='width:100%;color:#1B6C87;height:25px;'>
+			<p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
+			<input style="margin-top: 40px;" id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block"> 			
+		</div>
+	</div>    
 </div>
 
 <script type="text/javascript">

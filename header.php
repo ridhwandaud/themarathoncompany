@@ -58,6 +58,8 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
 <link rel="stylesheet" href="css/main.css">
 
+<link rel="stylesheet" href="css/style.css">
+
 <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 
 <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
