@@ -14,6 +14,8 @@ if($doLogout == "true") {
 }
 ?>
 
+
+<!-- @todo navbar -->
 <div class="cpy-logo-small" style="margin-top:10px;"></div>
 <button data-toggle="modal" data-href="dashboard.php" data-target="#doLogout" style="float:right;margin-top:20px;" type="button" class="btn btn-primary btn-sm">Logout</button>
 <div class="modal fade" id="doLogout" tab="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -69,6 +71,7 @@ if($doLogout == "true") {
         </div>
     </div>
         
+        <!-- @todo fix styling -->
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 100px;display:block;">
         <hr class="colorgraph" id="midBar" style="display: none;">
         <p class="bg-success" id="updtMsg" style="display: none;margin-top: 40px;">Record has been successfully updated.</p>
@@ -95,6 +98,9 @@ if($doLogout == "true") {
         $('#doLogout').on('show.bs.modal', function(e){});        
     });
 </script>
+
+
+<!-- @todo send js to it file -->
 <script type="text/javascript">
     /** Global Vars **/
     var gIcNo = 0;
