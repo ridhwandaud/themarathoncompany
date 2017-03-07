@@ -15,82 +15,140 @@ if($doLogout == "true") {
 ?>
 
 
-<!-- @todo navbar -->
-<div class="cpy-logo-small" style="margin-top:10px;"></div>
-<button data-toggle="modal" data-href="dashboard.php" data-target="#doLogout" style="float:right;margin-top:20px;" type="button" class="btn btn-primary btn-sm">Logout</button>
-<div class="modal fade" id="doLogout" tab="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">Are you sure?</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a href="dashboard.php?doLogout=true" class="btn btn-danger btn-ok">Logout</a>
-                
-            </div>
-        </div>
+<!-- Spinner -->
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 spinner-position">
+    <div id="loadAct" class="spinner" style="display: none;">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
     </div>
+</div> -->
+
+<!-- @todo navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <div class="container">
+
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            TMC
+        </a>
+    </div>
+
+    <div id="navbar" class="collapse navbar-collapse">
+        <form class="navbar-form navbar-right">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#doLogout">Logout</button>
+        </form>
+    </div>
+
+  </div>
+
+</nav>
+
+<div class="modal fade" id="doLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+
+            <div class="modal-body">Are you sure to logout?</div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                <a href="dashboard.php?doLogout=true" class="btn btn-primary btn-ok">Yes</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-<hr class="colorgraph">
+
+
 
 <div class="container">
-    <div class="form-group">
-		<label>Type:</label>
+    
+     <?php 
+        if($data) { ?> 
 
-         <select class="form-control form-block input-lg" id="select-type">
-			<option value="I">Ic No</option>
-			<option value="C">Confirmation No</option>
-		</select>
-    </div>        
-    <div class="form-group" id="search1">
-		<label>Enter IC No:</label>
-		<input type="text" name="icNo" id="icNo" class="form-control input-lg" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
-		
-	</div>
-	<div id="search2" class="form-group none">
-		<label>Enter Confirmation No:</label>
-		<input type="text" name="confirmationNo" id="confirmationNo" class="form-control input-lg" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
-	</div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="bg-danger btn-danger-custom" id="errMsg"></div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <input id="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div id="loadAct" class="spinner" style="display:none;">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
-    </div>
+        <p>Data available</p>
+
+        echo $data;
+
+        <?php } 
+    ?>    
+
+    <div class="col-md-6">
+        <div id="result" class="detailContainer"></div>
+        <hr class="colorgraph" id="midBar">
+        <p class="bg-success" id="updtMsg">Record has been successfully updated.</p>
         
-        <!-- @todo fix styling -->
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 100px;display:block;">
-        <hr class="colorgraph" id="midBar" style="display: none;">
-        <p class="bg-success" id="updtMsg" style="display: none;margin-top: 40px;">Record has been successfully updated.</p>
-        <div id="result" class="detailContrainer" style="display:none;"></div>
-        <div id="colSelf" style="display:none;">
-			<input style="margin-top: 40px;" id="collect" type="button" name="Collect" value="Collect Now" class="btn btn-lg btn-primary btn-block"> 
-		</div>
-		<div id="colOnbehalf" style="display:none;">
-			<div style='margin-top:30px;'></div>
-			<div class='txtTitle' style='color:#262829;font-size:13px;'>OB Name:</div>
-			<input type='text' name='sLastName' class='frmTxt' id='obName' style='width:100%;color:#1B6C87;height:25px;'>
-			<div class='txtTitle' style='color:#262829;font-size:13px;'>OB IC:</div>
-			<input type='text' name='sLastName' class='frmTxt' id='obIc' style='width:100%;color:#1B6C87;height:25px;'>
-			<div class='txtTitle' style='color:#262829;font-size:13px;'>OB Contact No:</div>
-			<input type='text' name='sLastName' class='frmTxt' id='obContact' style='width:100%;color:#1B6C87;height:25px;'>
-			<p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
-			<input style="margin-top: 40px;" id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block"> 			
-		</div>
-	</div>    
+        <div id="colSelf">
+            <input style="margin-top: 40px;" id="collect" type="button" name="Collect" value="Collect Now" class="btn btn-lg btn-primary btn-block"> 
+        </div>
+        <div id="colOnbehalf">
+            <div class="form-group">
+                <label>OB Name:</label>
+                <input type='text' name='onname' id='obName' class="form-control">
+            </div>
+            <div class="form-group">
+                <label>OB IC:</label>
+                <input type='text' name='onic' id='obIc' class="form-control">
+            </div>
+            <div class="form-group">
+                <label>OB Contact No:</label>
+                <input type='text' name='oncontact' id='obContact' class="form-control">
+            </div>
+
+            <p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
+            <input id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block">          
+        </div>
+    </div> 
+    <div class="col-md-6">
+        <div class="col-md-12 text-center">
+            <img src="/images/icewatchlogo.gif" alt="">
+        </div>    
+        <hr class="colorgraph">
+        <div class="form-group">
+    		<label>Type:</label>
+
+             <select class="form-control form-block input-lg" id="select-type">
+    			<option value="I">Ic No</option>
+    			<option value="C">Confirmation No</option>
+    		</select>
+        </div>        
+        <div class="form-group" id="search1">
+    		<label>Enter IC No:</label>
+    		<input type="text" name="icNo" id="icNo" class="form-control input-lg" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
+    		
+    	</div>
+    	<div id="search2" class="form-group none">
+    		<label>Enter Confirmation No:</label>
+    		<input type="text" name="confirmationNo" id="confirmationNo" class="form-control input-lg" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
+    	</div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bg-danger btn-danger-custom" id="errMsg"></div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <input id="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
+            </div>
+        </div> 
+    </div>    
 </div>
 
 <script type="text/javascript">
@@ -100,7 +158,7 @@ if($doLogout == "true") {
 </script>
 
 
-<!-- @todo send js to it file -->
+<!-- @todo send js to it file maybe try angular js-->
 <script type="text/javascript">
     /** Global Vars **/
     var gIcNo = 0;
@@ -110,6 +168,12 @@ if($doLogout == "true") {
             if(e.which == 13) {
                 clickOrEnter(); 
             }
+        });
+
+        $('#btnSearch').click(function() {
+          
+          clickOrEnter();   
+
         });
         
         $('#icno').keypress(function (e) {
@@ -121,11 +185,7 @@ if($doLogout == "true") {
             return true;
         });
         
-        $('#btnSearch').click(function() {
-		  
-          clickOrEnter();	
-
-        });
+        
 
         function clickOrEnter() {
 
@@ -178,48 +238,8 @@ if($doLogout == "true") {
                         } else if (response.statuscode == 200) { //data available
                             $('#loadAct').hide();
                             var data = response.data;
-                            gIcNo = data.icNo;
-                            if(data.status == "N") {
-                                statusColor = "#b78006;";
-                                sStatus = "Pending Collection";
-                                $('#colSelf').show();
-                                $('#result').html(
-                            "<h3 style='color:#62C2E4;'>"+data.name+"</h3>"
-                            +"<h4 style='margin-top: 20px;color: #F0776C;'>"+data.category+"</h4>"
-                            +"<h1 style='margin-top: 40px;'><b>Confirmation ID:</b> "+data.confirmId+"</h1>"
-                            +"<h1 style='margin-top: 5px;'><b>IC No:</b> "+data.icNo+"</h1>"
-                            +"<h5 style='margin-top: 5px;'><b>Gender:</b> "+data.gender+"</h4>"
-                            +"<h1 style='margin-top: 5px;'><b style='float:left;line-height:30px'>T-Shirt Size:</b><input type='text' name='sBib' class='frmTxt2' id='sTshirtSize' value='"+data.tShirtSize+"' style='margin-left:10px;width:50%;color:#1B6C87;height:50px;background:none;float:left;font-size: 40px;'></h1>"
-                            +"<div style='clear:both;margin-bottom:0px;'></div>"
-                            +"<h1 style='margin-top: 5px;'><b style='float:left;line-height:30px'>Bib:</b><input type='text' name='sBib' class='frmTxt2' id='sBib' value='"+data.bib+"' style='margin-left:10px;width:50%;color:#1B6C87;height:50px;background:none;float:left;font-size: 40px'></h1>"
-                            +"<div style='clear:both;'></div>"
-                            +"<h5 style='margin-top: 5px;'><b>Payment Bal:</b> RM "+data.paymentBalance+"</h5>"
-                            +"<h1 id='txtCollectStatus' style='margin-top: 5px;'><b>Status:</b> <span style='color: "+statusColor+"'>"+sStatus+"</span></h1>"
-                            +"<h5 style='margin-top: 5px;' id='collectByStatus'><b>Collect By:</b><select style='margin-top: 10px;width:40%;margin-left:10px;' class='select-style' name='sCollectType' id='sCollectType'>"
-                            +" <option value='S'>Self</option>"
-                            +" <option value='B'>On Behalf</option>"
-                            +"</select></h5>");
-                            } else {
-                                statusColor = "#04B431;";
-                                sStatus = "Collected";
-                                $('#result').html(
-                                    "<h3 style='color:#62C2E4;'>"+data.name+"</h3>"
-                                    +"<h4 style='margin-top: 20px;color: #F0776C;'>"+data.category+"</h4>"
-                                    +"<h1 style='margin-top: 40px;'><b>Confirmation ID:</b> "+data.confirmId+"</h1>"
-                                    +"<h1 style='margin-top: 5px;'><b>IC No:</b> "+data.icNo+"</h1>"
-                                    +"<h5 style='margin-top: 5px;'><b>Gender:</b> "+data.gender+"</h4>"
-                                    +"<h1 style='margin-top: 5px;'><b>T-Shirt Size:</b> "+data.tShirtSize+"</h1>"
-                                    +"<h1 style='margin-top: 5px;'><b>Bib:</b> "+data.bib+"</h1>"
-                                    +"<h5 style='margin-top: 5px;'><b>Payment Bal:</b> RM "+data.paymentBalance+"</h5>"
-                                    +"<h1 id='txtCollectStatus' style='margin-top: 5px;'><b>Status:</b> <span style='color: "+statusColor+"'>"+sStatus+"</span></h1>"
-                                    +"<h5 style='margin-top: 5px;'><b>O/B Name:</b> "+data.obName+"</h5>"
-                                    +"<h5 style='margin-top: 5px;'><b>O/B IC:</b> "+data.obIc+"</h5>"
-                                    +"<h5 style='margin-top: 5px;'><b>O/B Contact:</b> "+data.obContact+"</h5>"
-                                    );
-                            }
-                                    
-                            $('#result').show().fadeIn("fast");
-                            $('#midBar').show().fadeIn("fast");
+
+                            console.log(data);                       
                         }
                     }
                 }); //End $.ajax({
