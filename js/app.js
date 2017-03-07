@@ -3,15 +3,25 @@ angular.module('repcApp', [])
       var parameter = "icNo";
       var value = "970421085557";
 
+      $scope.runner = {};
 
-      $scope.search = function(){
+      $scope.runner.params = "icNo";
 
-        $http.post("api.php?sAction=getData&"+parameter+"="+value)
+      $scope.search = function(runner){
+        console.log("search input",runner);
+
+        $http.post("api.php?sAction=getData&"+runner.params+"="+runner.search)
         .then(function(response){
 
           console.log(response.data.data);
-
-          $scope.runner = response.data.data;
+          if(response.data.statuscode == 200)
+          {
+            $scope.runner = response.data.data;
+            $scope.successMessage = response.data.message;
+          }else{
+            $scope.errorMessage = response.data.message;
+          }
+          
 
         })
       }

@@ -78,8 +78,43 @@ if($doLogout == "true") {
 
 
 <div class="container" ng-controller="dashboardCtrl"> 
+    <div class="col-md-6 col-md-push-6">
+        <div class="col-md-12 text-center">
+            <img src="/images/icewatchlogo.gif">
+        </div>    
+        <hr class="colorgraph">
+        <div class="form-group">
+    		<label>Type:</label>
 
-    <div class="col-md-6">
+             <select class="form-control form-block" id="select-type" ng-model="runner.params">
+    			<option value="icNo">Ic No</option>
+    			<option value="confirmNo">Confirmation No</option>
+    		</select>
+        </div>        
+        <div class="form-group" id="search1">
+    		<label>Enter IC No:</label>
+    		<input type="text" ng-model="runner.search" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
+    	</div>
+    	<div id="search2" class="form-group none">
+    		<label>Enter Confirmation No:</label>
+    		<input type="text" name="confirmationNo" ng-model="runner.search" class="form-control" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
+    	</div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <div class="bg-danger btn-danger-custom" ng-show="successMessage">{{successMessage}}</div> -->
+                <!-- <div class="bg-danger btn-danger-custom" ng-show="errorMessage">{{errorMessage}}</div> -->
+                <p class="text-success" ng-show="successMessage">{{successMessage}}</p>
+                <p class="text-danger" ng-show="errorMessage">{{errorMessage}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <input zid="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block" ng-click="search(runner)">  
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
+            </div>
+        </div> 
+    </div>
+    <div class="col-md-6 col-md-pull-6">
         <div class="form-group">
             <label>Status</label>
             <h3>{{runner.status | statusFilter}}</h3>
@@ -139,40 +174,7 @@ if($doLogout == "true") {
             <p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
             <input id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block">          
         </div> -->
-    </div> 
-    <div class="col-md-6">
-        <div class="col-md-12 text-center">
-            <img src="/images/icewatchlogo.gif" alt="">
-        </div>    
-        <hr class="colorgraph">
-        <div class="form-group">
-    		<label>Type:</label>
-
-             <select class="form-control form-block" id="select-type">
-    			<option value="I">Ic No</option>
-    			<option value="C">Confirmation No</option>
-    		</select>
-        </div>        
-        <div class="form-group" id="search1">
-    		<label>Enter IC No:</label>
-    		<input type="text" name="icNo" id="icNo" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
-    	</div>
-    	<div id="search2" class="form-group none">
-    		<label>Enter Confirmation No:</label>
-    		<input type="text" name="confirmationNo" id="confirmationNo" class="form-control" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
-    	</div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="bg-danger btn-danger-custom" id="errMsg"></div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <input zid="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block" ng-click="search()">  
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
-            </div>
-        </div> 
-    </div>    
+    </div>     
 </div>
 
 <script type="text/javascript">

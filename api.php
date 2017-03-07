@@ -137,7 +137,7 @@ if(!empty($sAction)) {
 
 			$arrData['name'] = $arrResults['name'];
 
-         $arrData['category'] = $arrResults['f_category'];
+         	$arrData['category'] = $arrResults['f_category'];
 
 			$arrData['confirmId'] = $arrResults['f_confirm_id'];
 
