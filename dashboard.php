@@ -123,19 +123,19 @@ if($doLogout == "true") {
         <div class="form-group">
     		<label>Type:</label>
 
-             <select class="form-control form-block input-lg" id="select-type">
+             <select class="form-control form-block" id="select-type">
     			<option value="I">Ic No</option>
     			<option value="C">Confirmation No</option>
     		</select>
         </div>        
         <div class="form-group" id="search1">
     		<label>Enter IC No:</label>
-    		<input type="text" name="icNo" id="icNo" class="form-control input-lg" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
+    		<input type="text" name="icNo" id="icNo" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
     		
     	</div>
     	<div id="search2" class="form-group none">
     		<label>Enter Confirmation No:</label>
-    		<input type="text" name="confirmationNo" id="confirmationNo" class="form-control input-lg" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
+    		<input type="text" name="confirmationNo" id="confirmationNo" class="form-control" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
     	</div>
         <div class="row">
             <div class="col-md-12">
