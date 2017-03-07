@@ -62,8 +62,11 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
 <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+<script src="/bower_components/angular/angular.min.js"></script>
+
+<script src="/js/app.js"></script>
 
 
 </head>
 
-<body>
+<body ng-app>

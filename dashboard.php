@@ -77,24 +77,49 @@ if($doLogout == "true") {
 
 
 
-<div class="container">
-    
-     <?php 
-        if($data) { ?> 
-
-        <p>Data available</p>
-
-        echo $data;
-
-        <?php } 
-    ?>    
+<div class="container" ng-controller="dashboardCtrl"> 
 
     <div class="col-md-6">
-        <div id="result" class="detailContainer"></div>
-        <hr class="colorgraph" id="midBar">
-        <p class="bg-success" id="updtMsg">Record has been successfully updated.</p>
+        <div class="form-group">
+            <label>Status</label>
+            <h3>{{runner.status | statusFilter}}</h3>
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" ng-model="runner.name" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <input type="text" ng-model="runner.category" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Confirmation ID</label>
+            <input type="text" ng-model="runner.confirmId" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>IC Number</label>
+            <input type="text" ng-model="runner.icNo" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="text" ng-model="runner.gender" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Tshirt Size</label>
+            <input type="text" ng-model="runner.tShirtSize" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Bib Number</label>
+            <input type="text" ng-model="runner.bib" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Payment Balance</label>
+            <p>{{ runner.paymentBalance | currency : 'RM'}}</p>
+        </div>
+        <!-- <hr class="colorgraph" id="midBar"> -->
+        <!-- <p class="bg-success" id="updtMsg">Record has been successfully updated.</p> -->
         
-        <div id="colSelf">
+        <!-- <div id="colSelf">
             <input style="margin-top: 40px;" id="collect" type="button" name="Collect" value="Collect Now" class="btn btn-lg btn-primary btn-block"> 
         </div>
         <div id="colOnbehalf">
@@ -113,7 +138,7 @@ if($doLogout == "true") {
 
             <p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
             <input id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block">          
-        </div>
+        </div> -->
     </div> 
     <div class="col-md-6">
         <div class="col-md-12 text-center">
@@ -131,7 +156,6 @@ if($doLogout == "true") {
         <div class="form-group" id="search1">
     		<label>Enter IC No:</label>
     		<input type="text" name="icNo" id="icNo" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
-    		
     	</div>
     	<div id="search2" class="form-group none">
     		<label>Enter Confirmation No:</label>
@@ -142,7 +166,7 @@ if($doLogout == "true") {
                 <div class="bg-danger btn-danger-custom" id="errMsg"></div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
-              <input id="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
+              <input zid="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block" ng-click="search()">  
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
               <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
