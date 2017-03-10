@@ -24,6 +24,8 @@ $sAction = $_REQUEST['sAction'] ? $_REQUEST['sAction'] : "";
 
 $icNo = $_REQUEST['icNo'] ? $_REQUEST['icNo'] : "";
 
+$confirmNo = $_REQUEST['confirmNo'] ? $_REQUEST['confirmNo'] : "";
+
 
 /*******/
 
@@ -57,7 +59,7 @@ if(!empty($sAction)) {
 
 						f_confirm_id,
 
-                  f_category,
+                  		f_category,
 
 						f_icno,
 
@@ -81,13 +83,11 @@ if(!empty($sAction)) {
 
 		} else if(!empty($confirmNo)) {
 
-			
-
 			$sql = "SELECT CONCAT(f_firstname,' ',f_lastname) as name,
 
 						f_confirm_id,
 
-				  f_category,
+				  		f_category,
 
 						f_icno,
 

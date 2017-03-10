@@ -7,8 +7,13 @@ angular.module('repcApp', [])
 
       $scope.runner.params = "icNo";
 
+      $scope.showIc = true;
+
       $scope.search = function(runner){
         console.log("search input",runner);
+
+        $scope.errorMessage = "";
+        $scope.successMessage = "";
 
         $http.post("api.php?sAction=getData&"+runner.params+"="+runner.search)
         .then(function(response){
@@ -18,12 +23,37 @@ angular.module('repcApp', [])
           {
             $scope.runner = response.data.data;
             $scope.successMessage = response.data.message;
+            console.log($scope.runner.status)
+            if($scope.runner.status == "N")
+            {
+              $scope.collected = false;
+              alert("asasd");
+            }
+
           }else{
             $scope.errorMessage = response.data.message;
           }
           
 
         })
+      }
+
+      $scope.searchForm = function(valid)
+      {
+        if(valid)
+        {
+          searchSubmitted = true;
+        }
+      }
+
+      $scope.change = function(runner){
+        $scope.runner.search = "";
+        if(runner.params == "icNo")
+        {
+          $scope.showIc = true;
+        }else{
+          $scope.showIc = false;
+        }
       }
       
   })
