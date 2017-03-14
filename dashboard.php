@@ -116,8 +116,23 @@ if($doLogout == "true") {
                         <option value="ob">On Behalf</option>
                     </select>
                 </div>
+                <div ng-if="runner.collect == 'ob'">
+                    <div class="form-group" >
+                       <label>Collector Name</label>
+                        <input type="text" ng-model="collecter.name" class="form-control">
+                    </div> 
+                    <div class="form-group" >
+                       <label>Collector IC</label>
+                        <input type="text" ng-model="collecter.ic" class="form-control">
+                    </div>
+                    <div class="form-group" >
+                       <label>Collector Contact No</label>
+                        <input type="text" ng-model="collecter.mobile" class="form-control">
+                    </div>  
+                </div>
+                
                 <div class="form-group">
-                    <button class="btn btn-primary">Collect Now</button>
+                    <button class="btn btn-primary">{{runner.collect | collectFilter}}</button>
                 </div>
             </form>
 

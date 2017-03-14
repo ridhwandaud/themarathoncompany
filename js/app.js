@@ -17,18 +17,15 @@ angular.module('repcApp', [])
         $http.post("api.php?sAction=getData&"+$scope.runner.params+"="+runner.search)
         .then(function(response){
 
-          console.log(response.data);
           if(response.data.statuscode == 200)
           {
             $scope.runner = response.data.data;
             $scope.successMessage = response.data.message;
-            $scope.runner.collect = "self";
-            $scope.runner.params = "icNo";
-            console.log($scope.runner.status)
+
             if($scope.runner.status == "N")
             {
               $scope.collected = false;
-              alert("asasd");
+              $scope.runner.collect = "self";
             }
 
           }else{
@@ -68,6 +65,18 @@ angular.module('repcApp', [])
         status = 'Collected';
       }
       return status;
+    }
+  })
+  .filter('collectFilter',function(){
+    return function(collect){
+      if(collect == 'self')
+      {
+        collect = 'Collect Now';
+      }else if(collect == 'ob')
+      {
+        collect = 'Collect on Behalf';
+      }
+      return collect;
     }
   })
   ;
