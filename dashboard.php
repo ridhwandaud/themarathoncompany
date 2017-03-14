@@ -84,27 +84,13 @@ if($doLogout == "true") {
             <div class="col-md-12 text-center">
                 <img src="/images/icewatchlogo.gif">
             </div>    
-            <hr class="colorgraph">
-            <div class="form-group">
-        		<label>Type:</label>
-
-                 <select class="form-control form-block" id="select-type" ng-model="runner.params" ng-change="change(runner)">
-        			<option value="icNo">Ic No</option>
-        			<option value="confirmNo">Confirmation No</option>
-        		</select>
-            </div>        
+            <hr class="colorgraph">      
             <div class="form-group" ng-if="showIc == true">
-        		<label>Enter IC No:</label>
+        		<label>Enter IC No or Confirmation No:</label>
         		<input type="text" ng-model="runner.search" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
-        	</div>
-        	<div class="form-group" ng-if="showIc == false">
-        		<label>Enter Confirmation No:</label>
-        		<input type="text" name="confirmationNo" ng-model="runner.search" class="form-control" placeholder="eg: MY192481" autocomplete="off" maxlength="40" >
         	</div>
             <div class="row">
                 <div class="col-md-12">
-                    <!-- <div class="bg-danger btn-danger-custom" ng-show="successMessage">{{successMessage}}</div> -->
-                    <!-- <div class="bg-danger btn-danger-custom" ng-show="errorMessage">{{errorMessage}}</div> -->
                     <p class="text-success" ng-show="successMessage">{{successMessage}}</p>
                     <p class="text-danger" ng-show="errorMessage">{{errorMessage}}</p>
                 </div>
@@ -126,8 +112,8 @@ if($doLogout == "true") {
                 <div class="form-group">
                     <label>Collect By</label>
                     <select class="form-control form-block" id="select-type" ng-model="runner.collect" ng-change="collect(runner)">
-                        <option value="icNo">Self</option>
-                        <option value="confirmNo">On Behalf</option>
+                        <option value="self">Self</option>
+                        <option value="ob">On Behalf</option>
                     </select>
                 </div>
                 <div class="form-group">

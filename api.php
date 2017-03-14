@@ -79,7 +79,7 @@ if(!empty($sAction)) {
 
 						f_ob_contact
 
-					FROM dbm_marathon_users WHERE f_icno = '".$icNo."'"; 
+					FROM dbm_marathon_users WHERE f_icno = '".$icNo."' OR f_confirm_id = '".$icNo."'" ; 
 
 		} else if(!empty($confirmNo)) {
 
