@@ -73,7 +73,10 @@ angular.module('repcApp', ['ngFlash'])
           console.log("response",response);
           $scope.collected = true;
           $scope.runner.status = "Y";
-          var message = '<strong>Runner successfully collect kit.</strong>';
+          if(runner.collect == 'self')
+            var message = '<strong>Runner successfully collect kit.</strong>';
+          else
+            var message = '<strong>Runner on behalf successfully collect kit.</strong>';
           var id = Flash.create('success', message);
         },function(error){
           console.log('error : ',error);

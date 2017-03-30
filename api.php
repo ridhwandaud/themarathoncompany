@@ -223,17 +223,17 @@ if(!empty($sAction)) {
 
 						f_status = 'Y',
 
-						f_ob_name = '".$data["collectorName"]."',
+						f_ob_name = '".$data["collecterName"]."',
 
-						f_ob_ic = '".$obIc."',
+						f_ob_ic = '".$data["collecterIc"]."',
 
-						f_ob_contact = '".$obContact."',
+						f_ob_contact = '".$data["collecterMobile"]."',
 
-						f_bib = '".$sBib."',
+						f_bib = '".$data["bib"]."',
 
-						f_tshirt_size = '".$sTshirtSize."'
+						f_tshirt_size = '".$data["tShirtSize"]."'
 
-						WHERE f_icno = '".$icNo."'";
+						WHERE f_icno = '".$data["icNo"]."'";
 
 				$query = mysql_query($sql) or exit("Sql Error".mysql_error());
 
