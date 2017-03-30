@@ -45,15 +45,6 @@ $sTshirtSize  = isset($_REQUEST['sTshirtSize']) ? $_REQUEST['sTshirtSize'] : "";
 //request payload
 $data = json_decode(file_get_contents('php://input'), true);
 
-echo $data["bib"];
-
-// $data = json_decode($request_body);
-
-// echo $data;
-// $collect = isset($data['collect']) ? $data['collect'] : "";
-
-// echo $collect;
-
 if(!empty($sAction)) {
 
     

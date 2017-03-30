@@ -70,6 +70,13 @@ angular.module('repcApp', ['ngFlash'])
       {
         $http.post("api.php?sAction=updtData",runner)
         .then(function(response){
+          console.log("response",response);
+          $scope.collected = true;
+          $scope.runner.status = "Y";
+          var message = '<strong>Runner successfully collect kit.</strong>';
+          var id = Flash.create('success', message);
+        },function(error){
+          console.log('error : ',error);
         })
 
       }
