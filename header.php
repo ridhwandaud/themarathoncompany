@@ -65,6 +65,8 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 	<script src="/bower_components/angular/angular.min.js"></script>
+
+	<script src="/bower_components/angular-flash-alert/dist/angular-flash.min.js"></script>
 	
 	<script src="/js/app.js"></script>
 

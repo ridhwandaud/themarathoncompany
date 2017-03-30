@@ -78,7 +78,7 @@ if($doLogout == "true") {
 
 
 <div class="container" ng-controller="dashboardCtrl">
-
+    <flash-message></flash-message> 
     <div class="col-md-6 col-md-push-6">
         <form name="searchForm" ng-submit="checkForm(searchForm.$invalid)">
             <div class="col-md-12 text-center">
@@ -108,7 +108,7 @@ if($doLogout == "true") {
             <label>Status</label>
             <h3>{{runner.status | statusFilter}}</h3>
                 
-            <form action="" ng-if="collected == false">
+            <form ng-if="collected == false">
                 <div class="form-group">
                     <label>Collect By</label>
                     <select class="form-control form-block" id="select-type" ng-model="runner.collect" ng-change="collect(runner)">
@@ -119,20 +119,20 @@ if($doLogout == "true") {
                 <div ng-if="runner.collect == 'ob'">
                     <div class="form-group" >
                        <label>Collector Name</label>
-                        <input type="text" ng-model="collecter.name" class="form-control">
+                        <input type="text" ng-model="runner.collecterName" class="form-control">
                     </div> 
                     <div class="form-group" >
                        <label>Collector IC</label>
-                        <input type="text" ng-model="collecter.ic" class="form-control">
+                        <input type="text" ng-model="runner.collecterIc" class="form-control">
                     </div>
                     <div class="form-group" >
                        <label>Collector Contact No</label>
-                        <input type="text" ng-model="collecter.mobile" class="form-control">
+                        <input type="text" ng-model="runner.collecterMobile" class="form-control">
                     </div>  
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-primary">{{runner.collect | collectFilter}}</button>
+                    <button class="btn btn-primary" ng-click="collectKit(runner,collecter)">{{runner.collect | collectFilter}}</button>
                 </div>
             </form>
 

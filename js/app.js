@@ -1,5 +1,5 @@
-angular.module('repcApp', [])
-  .controller('dashboardCtrl', function($scope,$http) {
+angular.module('repcApp', ['ngFlash'])
+  .controller('dashboardCtrl', function($scope,$http,Flash) {
       var parameter = "icNo";
       var value = "970421085557";
 
@@ -14,13 +14,23 @@ angular.module('repcApp', [])
 
         $scope.runner.params = 'icNo';
 
+        if(runner.search == undefined)
+        {
+          var message = '<strong>Please fill in the ic/cono</strong>';
+          var id = Flash.create('warning', message);
+          return;
+        }
+
         $http.post("api.php?sAction=getData&"+$scope.runner.params+"="+runner.search)
         .then(function(response){
 
           if(response.data.statuscode == 200)
           {
             $scope.runner = response.data.data;
-            $scope.successMessage = response.data.message;
+            $scope.successMessage = "User found";
+
+            var message = '<strong>' + $scope.successMessage + '</strong>';
+            var id = Flash.create('success', message);
 
             if($scope.runner.status == "N")
             {
@@ -30,6 +40,8 @@ angular.module('repcApp', [])
 
           }else{
             $scope.errorMessage = response.data.message;
+            var message = '<strong>' + response.data.message + '</strong>';
+            var id = Flash.create('danger', message);
           }
           
 
@@ -52,6 +64,14 @@ angular.module('repcApp', [])
         }else{
           $scope.showIc = false;
         }
+      }
+
+      $scope.collectKit = function(runner,collecter)
+      {
+        $http.post("api.php?sAction=updtData",runner)
+        .then(function(response){
+        })
+
       }
       
   })

@@ -42,6 +42,17 @@ $sBib  = isset($_REQUEST['sBib']) ? $_REQUEST['sBib'] : "";
 $sTshirtSize  = isset($_REQUEST['sTshirtSize']) ? $_REQUEST['sTshirtSize'] : "";
 
 
+//request payload
+$data = json_decode(file_get_contents('php://input'), true);
+
+echo $data["bib"];
+
+// $data = json_decode($request_body);
+
+// echo $data;
+// $collect = isset($data['collect']) ? $data['collect'] : "";
+
+// echo $collect;
 
 if(!empty($sAction)) {
 
@@ -141,7 +152,7 @@ if(!empty($sAction)) {
 
 			$arrData['confirmId'] = $arrResults['f_confirm_id'];
 
-			$arrData['icNo'] = $updateIcNo;
+			$arrData['icNo'] = $arrResults['f_icno'];
 
 			$arrData['gender'] = $arrResults['f_gender'];
 
@@ -213,15 +224,15 @@ if(!empty($sAction)) {
 
     } else if($sAction == "updtData") {
 
-        if($icNo) {
+        if($data["icNo"]) {
 
-			if($sOnBehalf === "true") {
+			if($data["collect"] === "ob") {
 
 				$sql = "UPDATE dbm_marathon_users SET 
 
 						f_status = 'Y',
 
-						f_ob_name = '".$obName."',
+						f_ob_name = '".$data["collectorName"]."',
 
 						f_ob_ic = '".$obIc."',
 
@@ -259,11 +270,11 @@ if(!empty($sAction)) {
 
 						f_status = 'Y',
 
-						f_bib = '".$sBib."',
+						f_bib = '".$data["bib"]."',
 
-						f_tshirt_size = '".$sTshirtSize."'
+						f_tshirt_size = '".$data["tShirtSize"]."'
 
-						WHERE f_icno = '".$icNo."'";
+						WHERE f_icno = '".$data["icNo"]."'";
 
 				$query = mysql_query($sql) or exit("Sql Error".mysql_error());
 
@@ -273,7 +284,7 @@ if(!empty($sAction)) {
 
 						"statuscode" => 200,
 
-						"data" => "Status = 'Y' for IC No - ".$icNo."",
+						"data" => "Status = 'Y' for IC No - ".$data["icNo"]."",
 
 						"message" => "Successful"
 
