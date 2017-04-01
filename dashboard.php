@@ -38,7 +38,7 @@ if($doLogout == "true") {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             TMC
         </a>
     </div>
@@ -105,7 +105,7 @@ if($doLogout == "true") {
     </div>
     <div class="col-md-6 col-md-pull-6">
         <div class="form-group">
-            <label>Status</label>
+            <label>Kit Collect Status</label>
             <h3>{{runner.status | statusFilter}}</h3>
                 
             <form ng-if="collected == false">

@@ -44,29 +44,32 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
 <head>
 
-<meta charset="utf-8">
+	<meta charset="utf-8">
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<title>TMC - <?php echo $filename; ?></title>
+	<title>TMC - <?php echo $filename; ?></title>
 
-<meta name="description" content="">
+	<meta name="description" content="">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
 
-<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/main.css">
 
-<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
 
-<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 
-<script src="/bower_components/angular/angular.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-<script src="/js/app.js"></script>
+	<script src="/bower_components/angular/angular.min.js"></script>
 
+	<script src="/bower_components/angular-flash-alert/dist/angular-flash.min.js"></script>
+	
+	<script src="/js/app.js"></script>
 
 </head>
 
-<body ng-app>
+<body ng-app="repcApp">

@@ -1,60 +1,71 @@
 <?php
-
 require_once('header.php');
 
-
-
 //Check session
-
 if(!isset($_SESSION['admin'])) {
-
     echo "<script>location.href='index.php'</script>";
-
 }
-
-
 
 $doLogout = isset($_REQUEST['doLogout']) ? $_REQUEST['doLogout'] : "false";
 
-
-
 if($doLogout == "true") {
-
     session_destroy();
-
     echo "<script>window.location = 'index.php';</script>";
-
 }
-
 ?>
 
-<div class="container">
 
-	<div class="header-container">
+<!-- Spinner -->
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 spinner-position">
+    <div id="loadAct" class="spinner" style="display: none;">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div> -->
 
-		<div class="cpy-logo-small"></div>
+<!-- @todo navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
 
-		<div class="adm-header-title">Admin Control Panel</div>
+  <div class="container">
 
-	</div>
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+            TMC
+        </a>
+    </div>
 
-    <button data-toggle="modal" data-href="dashboard.php" data-target="#doLogout" style="float:right;margin-top:20px;" type="button" class="btn btn-primary btn-sm">Logout</button>
+    <div id="navbar" class="collapse navbar-collapse">
+        <form class="navbar-form navbar-right">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#doLogout">Logout</button>
+        </form>
+    </div>
 
-    <div class="modal fade" id="doLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  </div>
 
-    <div class="modal-dialog">
+</nav>
+
+<div class="modal fade" id="doLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-sm">
 
         <div class="modal-content">
 
-            <div class="modal-body">Are you sure?</div>
+            <div class="modal-body">Are you sure to logout?</div>
 
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-                <a href="dashboard.php?doLogout=true" class="btn btn-danger btn-ok">Logout</a>
-
-                
+                <a href="dashboard.php?doLogout=true" class="btn btn-primary btn-ok">Yes</a>
 
             </div>
 
@@ -64,473 +75,291 @@ if($doLogout == "true") {
 
 </div>
 
-    <div style="clear:both;"></div>
 
-    <hr class="colorgraph">
 
-    <div class="form-group" style="margin-top:30px;">
-
-        <form action="" method="post">
-
-			<h3>Type:</h3>
-
-			<div class="select-style" style="margin-top: 10px;">
-
-                 <select id="select-type">
-
-					<option value="I">Ic No</option>
-
-					<option value="C">Confirmation No</option>
-
-				</select>
-
-            </div>
-
-			<div id="search1">
-
-				<h3>Enter IC No:</h3>
-
-				<input type="text" name="icNo" id="icNo" class="form-control input-pincode" placeholder="eg: 700101010101" autocomplete="off" maxlength="30">
-
-			</div>
-
-			<div id="search2" style="display:none;">
-
-				<h3>Enter Confirmation No:</h3>
-
-				<input type="text" name="confirmationNo" id="confirmationNo" class="form-control input-pincode" placeholder="eg: MY192481" autocomplete="off">
-
-			</div>
-
-            <div class="row-enter" style="margin-top:20px;">
-
-				<div class="bg-danger" id="errMsg" style="display: none;color: #e26a6a;font-size: 16px;margin-bottom:20px;"></div>
-
-                <div class="col-xs-6 col-sm-6 col-md-6">
-
-                  <input id="btnSearch" type="button" name="Search" value="Search" class="btn btn-lg btn-success btn-block">  
-
+<div class="container" ng-controller="dashboardCtrl">
+    <flash-message></flash-message> 
+    <div class="col-md-6 col-md-push-6">
+        <form name="searchForm" ng-submit="checkForm(searchForm.$invalid)">
+            <div class="col-md-12 text-center">
+                <img src="/images/icewatchlogo.gif">
+            </div>    
+            <hr class="colorgraph">      
+            <div class="form-group" ng-if="showIc == true">
+        		<label>Enter IC No or Confirmation No:</label>
+        		<input type="text" ng-model="runner.search" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
+        	</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-success" ng-show="successMessage">{{successMessage}}</p>
+                    <p class="text-danger" ng-show="errorMessage">{{errorMessage}}</p>
                 </div>
-
+                <div class="col-xs-6 col-sm-6 col-md-6" >
+                  <input zid="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block" ng-click="search(runner)">  
+                </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
-
                   <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
-
                 </div>
-
-            </div>
-
-        </form>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-
-            <div id="loadAct" class="spinner" style="display:none;">
-
-                <div class="rect1"></div>
-
-                <div class="rect2"></div>
-
-                <div class="rect3"></div>
-
-                <div class="rect4"></div>
-
-                <div class="rect5"></div>
-
-            </div>
-
+            </div>  
+        </form> 
+    </div>
+    <hr class="visible-xs">
+    <div class="col-md-6 col-md-pull-6">
+        <div class="form-group">
+            <label for="">Status</label>
+            <select name="" id="" class="form-control" ng-model="runner.status">
+                <option value="Y">Collected</option>
+                <option value="N">Not Collected</option>
+            </select>
         </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" ng-model="runner.firstname" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <input type="text" ng-model="runner.category" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Confirmation ID</label>
+            <input type="text" ng-model="runner.confirmId" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>IC Number (*uneditable)</label>
+            <input type="text" ng-model="runner.icNo" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="text" ng-model="runner.gender" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Tshirt Size</label>
+            <input type="text" ng-model="runner.tShirtSize" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Bib Number</label>
+            <input type="text" ng-model="runner.bib" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Payment Balance</label>
+            <!-- <p>{{ runner.paymentBalance | currency : 'RM'}}</p> -->
+            <input type="text" ng-model="runner.paymentBalance" class="form-control">
+        </div>
+        <div class="form-group" >
+           <label>Collector Name</label>
+            <input type="text" ng-model="runner.obName" class="form-control">
+        </div> 
+        <div class="form-group" >
+           <label>Collector IC</label>
+            <input type="text" ng-model="runner.obIc" class="form-control">
+        </div>
+        <div class="form-group" >
+           <label>Collector Contact No</label>
+            <input type="text" ng-model="runner.obContact" class="form-control">
+        </div> 
+        <!-- <hr class="colorgraph" id="midBar"> -->
+        <!-- <p class="bg-success" id="updtMsg">Record has been successfully updated.</p> -->
+        
+        <!-- <div id="colSelf">
+            <input style="margin-top: 40px;" id="collect" type="button" name="Collect" value="Collect Now" class="btn btn-lg btn-primary btn-block"> 
+        </div>
+        <div id="colOnbehalf">
+            <div class="form-group">
+                <label>OB Name:</label>
+                <input type='text' name='onname' id='obName' class="form-control">
+            </div>
+            <div class="form-group">
+                <label>OB IC:</label>
+                <input type='text' name='onic' id='obIc' class="form-control">
+            </div>
+            <div class="form-group">
+                <label>OB Contact No:</label>
+                <input type='text' name='oncontact' id='obContact' class="form-control">
+            </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0;margin-top: 100px;display:block;">
-
-				<div  id="result" class="container" style="display:none;"></div>
-
-				<hr class="colorgraph" id="midBar" style="display: none;">
-
-            <p class="bg-success" id="updtMsg" style="display: none;margin-top: 40px;"></p>
-
-            <input style="display: none;margin-top: 40px;" id="btnUpdate" type="button" name="update" value="Update" class="btn btn-lg btn-primary btn-block">    
-
-        </div>    
-
-    </div> 
-
+            <p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
+            <input id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block">          
+        </div> -->
+    </div>     
 </div>
 
-
-
 <script type="text/javascript">
-
     $(function(){
-
         $('#doLogout').on('show.bs.modal', function(e){});        
-
     });
-
 </script>
 
+
+<!-- @todo send js to it file maybe try angular js-->
 <script type="text/javascript">
-
     /** Global Vars **/
-
     var gIcNo = 0;
-
     $(document).ready(function () {
 
-        
-
-        $('#icno').keypress(function (e) {
-
-            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-
-              //display error message
-
-              $("#errMsg").html("Error: Only numeric values").show().fadeOut("slow");
-
-                return false;
-
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+                clickOrEnter(); 
             }
-
-            return true;
-
         });
-
-        
 
         $('#btnSearch').click(function() {
+          
+          clickOrEnter();   
+
+        });
+        
+        $('#icno').keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+              //display error message
+              $("#errMsg").html("Error: Only numeric values").show().fadeOut("slow");
+                return false;
+            }
+            return true;
+        });
+        
+        
+
+        function clickOrEnter() {
 
             var type = $('#select-type').val();
+            var bContinue = false;
+            var parameter = "";
+            var value = "";
+            var statusColor = "";
+            //Validate
+            if(type === "I") {
+                if ($.trim($('#icNo').val()) == '') {
+                    $('#errMsg').html("Ic No cannot be blank.").show().fadeOut(3000);
+                } else {
+                    bContinue = true;
+                    value = $.trim($('#icNo').val());
+                    parameter = "icNo";
+                }   
+            } 
 
-			var bContinue = false;
-
-			var parameter = "";
-
-			var value = "";
-
-			var statusColor = "";
-
-			//Validate
-
-			//Validate
-
-			if(type === "I") {
-
-				if ($.trim($('#icNo').val()) == '') {
-
-					$('#errMsg').html("Ic No cannot be blank.").show().fadeOut(3000);
-
-				} else {
-
-					bContinue = true;
-
-					value = $.trim($('#icNo').val());
-
-					parameter = "icNo";
-
-				}	
-
-			} 
-
-
-
-			if(type === "C"){
-
-				if ($.trim($('#confirmationNo').val()) == '') {
-
-					$('#errMsg').html("Confirmation No cannot be blank.").show().fadeOut(3000);
-
-				} else {
-
-					bContinue = true;
-
-					value = $.trim($('#confirmationNo').val());
-
-					parameter = "confirmNo";
-
-				}
-
-			}
-
-			
-
-			if(bContinue) {
-
-				/* Just in case, hide again*/
-
-				$('#result').html('');
-
-				$('#result').hide();
-
-				$('#midBar').hide();
-
-				$('#collect').hide();
-
-				
-
-				$.ajax({
-
+            if(type === "C"){
+                if ($.trim($('#confirmationNo').val()) == '') {
+                    $('#errMsg').html("Confirmation No cannot be blank.").show().fadeOut(3000);
+                } else {
+                    bContinue = true;
+                    value = $.trim($('#confirmationNo').val());
+                    parameter = "confirmNo";
+                }
+            }
+            
+            if(bContinue) {
+                /* Just in case, hide again*/
+                $('#result').html('');
+                $('#result').hide();
+                $('#midBar').hide();
+                $('#colSelf').hide();
+                
+                $.ajax({
                     type: "POST",
-
                     dataType: "json", 
-
                     url: "api.php?sAction=getData&"+parameter+"="+value+"",
-
                     beforeSend: function() {
-
                         $('#loadAct').show();
-
                     },
-
-                    success: function(response) { 
-
-						var data = response.data;
-
+                    success: function(response) {    
+                        var data = response.data;
+                        var sStatus = "";
                         if (response.statuscode == 202) {
-
                             $('#loadAct').hide();
-
                             $('#errMsg').html("Record not found. Please try again").show().fadeOut(2500);
-
                         } else if (response.statuscode == 200) { //data available
-
-							$('#loadAct').hide();
-
-							var data = response.data;
-
-							gIcNo = data.icNo;
-
-							var sStatus = "";
-
-							var sPendingStatus = "";
-
-							var sCollectedStatus = "";
-
-							if(data.status == "N") {
-
-								sPendingStatus = "selected";
-
-							} else {
-
-								sCollectedStatus = "selected";
-
-							}
-
-							
-
-							$('#result').html(
-
-								"<div class='txtTitle' style='color:#669AE1;'>Firstname:</div>"
-
-								+"<input type='text' name='sFirstName' class='frmTxt' id='sFirstName' style='width:100%' value='"+data.firstname+"'>"
-
-								+"<div class='txtTitle' style='color:#FECF71;'>Lastname:</div>"
-
-								+"<input type='text' name='sLastName' class='frmTxt' id='sLastName' style='width:100%' value='"+data.lastname+"'>"
-
-								+"<div class='txtTitle' style='color:#669AE1;'>Confirmation ID:</div>"
-
-								+"<input type='text' name='sConfirmId' class='frmTxt' id='sConfirmId' style='width:100%' value='"+data.confirmId+"'>"
-
-								+"<div class='txtTitle' style='color:#FECF71;'>Category:</div>"
-
-								+"<input type='text' name='sCategory' class='frmTxt' id='sCategory' style='width:100%' value='"+data.category+"'>"
-
-								+"<div class='txtTitle' style='color:#669AE1;'>IC No: <font style='color:#D2322D;font-size:8px;'>**uneditable field</font></div>"
-
-								+"<input type='text' style='color:#dddddd' disabled name='sIcNo' class='frmTxt' id='sIcNo' style='width:100%' value='"+data.icNo+"'>"
-
-								+"<div class='txtTitle' style='color:#FECF71;'>Gender:</div>"
-
-								+"<input type='text' name='sGender' class='frmTxt' id='sGender' style='width:100%' value='"+data.gender+"'>"
-
-								+"<div class='txtTitle' style='color:#669AE1;'>T-Shirt Size:</div>"
-
-								+"<input type='text' name='sTshirtSize' class='frmTxt' id='sTshirtSize' style='width:100%' value='"+data.tShirtSize+"'>"
-
-								+"<div class='txtTitle' style='color:#FECF71;'>Bib:</div>"
-
-								+"<input type='text' name='sBib' class='frmTxt' id='sBib' style='width:100%' value='"+data.bib+"'>"
-
-								+"<div class='txtTitle' style='color:#669AE1;'>Payment Balance(RM):</div>"
-
-								+"<input type='text' name='sPaymentBalance' class='frmTxt' id='sPaymentBalance' style='width:100%' value='"+data.paymentBalance+"'>"
-
-								+"<div class='txtTitle' style='color:#FECF71;'>Status:</div>"
-
-								+"<select style='margin-top: 10px;' class='select-style' name='sStatus' id='sStatus'>"
-
-								+" <option value='N' "+sPendingStatus+">Pending Collection</option>"
-
-								+" <option value='Y' "+sCollectedStatus+">Collected</option>"
-
-								+"</select>"
-
-								+"<div class='borderLine' style='margin-top:20px;'></div>"
-
-								+"<div class='txtTitle' style='color:#669AE1;'>OB Name:</div>"
-
-								+"<input type='text' name='obName' class='frmTxt' id='obName' style='width:100%;' value='"+data.obName+"'>"
-
-								+"<div class='txtTitle' style='color:#FECF71;'>OB IC:</div>"
-
-								+"<input type='text' name='obIc' class='frmTxt' id='obIc' style='width:100%;' value='"+data.obIc+"'>"
-
-								+"<div class='txtTitle' style='color:#669AE1;'>OB Contact No:</div>"
-
-								+"<input type='text' name='obContact' class='frmTxt' id='obContact' style='width:100%;' value='"+data.obContact+"'>");
-
-								
-
-							$('#btnUpdate').show();
-
-							$('#result').show().fadeIn("fast");
-
-							$('#midBar').show().fadeIn("fast");
-
-						}//End if (response.statuscode == 202) {
-
-					}
-
-				});//End $.ajax({
-
-			}//End if(bContinue) {            
-
-        });
-
-        
-
-        $('#btnUpdate').click(function() {
-
-				
-
-				var sIcNo = $.trim($('#sIcNo').val());
-
-				var sFirstName = $.trim($('#sFirstName').val());
-
-				var sLastName = $.trim($('#sLastName').val());
-
-				var sCategory = $.trim($('#sCategory').val());
-
-				var sConfirmId = $.trim($('#sConfirmId').val());
-
-				var sGender = $.trim($('#sGender').val());
-
-				var sTshirtSize = $.trim($('#sTshirtSize').val());
-
-				var sBib = $.trim($('#sBib').val());
-
-				var sPaymentBalance = $.trim($('#sPaymentBalance').val());
-
-				var sStatus = $.trim($('#sStatus').val());
-
-				var obName = $.trim($('#obName').val());
-
-				var obIc = $.trim($('#obIc').val());
-
-				var obContact = $.trim($('#obContact').val());
-
-				
-
-            $.ajax({
-
-                    type: "POST",
-
-                    dataType: "json", 
-
-                    url: "api.php?sAction=updtData&icNo="+sIcNo+"&sFirstName="+sFirstName+"&sLastName="+sLastName+"&sCategory="+sCategory+"&confirmNo="+sConfirmId+"&sGender="+sGender+"&sTshirtSize="+sTshirtSize+"&sBib="+sBib+"&sPaymentBalance="+sPaymentBalance+"&sStatus="+sStatus+"&obName="+obName+"&obIc="+obIc+"&obContact="+obContact,
-
-                    beforeSend: function() {
-
-                    },
-
-                    success: function(response) {
-
-
-
-								if(response.statuscode == 202) {
-
-									 $("#updtMsg").html(response.message);
-
-									 $("#updtMsg").show().fadeOut(3000);
-
-								} else if(response.statuscode == 200) {
-
-									 $("#updtMsg").html(response.message);
-
-									 $("#updtMsg").show().fadeOut(3000);
-
-								}
-
+                            $('#loadAct').hide();
+                            var data = response.data;
+
+                            console.log(data);                       
+                        }
                     }
-
-            });        
-
-        });
-
+                }); //End $.ajax({
+            }//End if(bContinue)
         
-
-        $('#btnClear').click(function() {
-
-            $('#icNo').val("");
-
-			$('#confirmationNo').val("");
-
-            $('#result').html('');
-
-            $('#result').hide();
-
-            $('#midBar').hide();
-
-            $('#btnUpdate').hide();
-
-        });
-
+        }
 		
-
-		$('#select-type').on('change', function(){
-
-			var option = $('option:selected', this);
-
+		
+		$(document).on('change', '#sCollectType', function() {
 			var val = this.value;
-
-			$('#icNo').val("");
-
-			$('#confirmationNo').val("");
-
-			$('#result').html('');
-
-            $('#result').hide();
-
-			$('#midBar').hide();
-
-            $('#btnUpdate').hide();
-
 			
-
-			if(val == "I") {
-
-				
-
-				$('#search2').hide();
-
-				$('#search1').show();
-
+			if (val === 'B') {
+				$("#colSelf").hide();
+				$("#colOnbehalf").show();
 			} else {
-
-				$('#search1').hide();
-
-				$('#search2').show();
-
+				$("#colSelf").show();
+				$("#colOnbehalf").hide();
 			}
+			
+		});
 
-		});	
-
+		$('#collect2').click(function() {
+			
+			
+			var obName = $.trim($('#obName').val());
+			var obIc = $.trim($('#obIc').val());
+			var obContact = $.trim($('#obContact').val());
+            var sBib = $.trim($('#sBib').val());
+			var sTshirtSize = $.trim($('#sTshirtSize').val());
+			
+			if(obName == "" || obIc == "" || obContact == "") {
+				$('#errorMsg').show().fadeOut(1500);
+			} else {
+				//Convert back to db format without dash ("-")
+				var clean1 = gIcNo.replace("-","");
+				var icNo = clean1.replace("-","");
+				$.ajax({
+						type: "POST",
+						dataType: "json", 
+						url: "api.php?sAction=updtData&sOnBehalf=true&obName="+obName+"&obIc="+obIc+"&obContact="+obContact+"&s&icNo="+icNo+"&sBib="+sBib+"&sTshirtSize="+sTshirtSize,
+						beforeSend: function() {
+							$('#colOnbehalf').hide();
+						},
+						success: function(response) {
+							var data = response.data;
+							$('#txtCollectStatus').html('Status  : <span style="color: #54a341">Collected</span>');
+							$("#updtMsg").show().fadeOut(3000);
+							$("#sCollectType").hide();
+							$("#collectByStatus").hide();
+						}
+				});  
+			}
+        });	
+		
+        $('#collect').click(function() {
+			
+			//Convert back to db format without dash ("-")
+			var clean1 = gIcNo.replace("-","");
+			var icNo = clean1.replace("-","");
+			var sBib = $.trim($('#sBib').val());
+			var sTshirtSize = $.trim($('#sTshirtSize').val());
+            $.ajax({
+                    type: "POST",
+                    dataType: "json", 
+                    url: "api.php?sAction=updtData&icNo="+icNo+"&sBib="+sBib+"&sTshirtSize="+sTshirtSize,
+                    beforeSend: function() {
+                        $('#colSelf').hide();
+                    },
+                    success: function(response) {
+                        var data = response.data;
+                        $('#txtCollectStatus').html('Status  : <span style="color: #54a341">Collected</span>');
+                        $("#updtMsg").show().fadeOut(3000);
+						$("#sCollectType").hide();
+						$("#collectByStatus").hide();
+                    }
+            });        
+        });
+		
+        $('#btnClear').click(function() {
+            $('#icNo').val("");
+			$('#confirmationNo').val("");
+            $('#result').html('');
+            $('#result').hide();
+            $('#midBar').hide();
+            $('#colSelf').hide();
+        });
+		
     });
-
 </script>
-
 <?php require_once('footer.php'); ?>
-
-
-
-
 
