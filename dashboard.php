@@ -82,7 +82,7 @@ if($doLogout == "true") {
     <div class="col-md-6 col-md-push-6">
         <form name="searchForm" ng-submit="checkForm(searchForm.$invalid)">
             <div class="col-md-12 text-center">
-                <img src="/images/icewatchlogo.gif">
+                <img src="/images/event-logo.png" class="img-responsive">
             </div>    
             <hr class="colorgraph">      
             <div class="form-group" ng-if="showIc == true">
@@ -90,15 +90,15 @@ if($doLogout == "true") {
         		<input type="text" ng-model="runner.search" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
         	</div>
             <div class="row">
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <p class="text-success" ng-show="successMessage">{{successMessage}}</p>
                     <p class="text-danger" ng-show="errorMessage">{{errorMessage}}</p>
-                </div>
+                </div> -->
                 <div class="col-xs-6 col-sm-6 col-md-6" >
                   <input zid="btnSearch" type="submit" name="Search" value="Search" class="btn btn-lg btn-success btn-block" ng-click="search(runner)">  
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                  <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block">  
+                  <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block" ng-click="clear()">  
                 </div>
             </div>  
         </form> 

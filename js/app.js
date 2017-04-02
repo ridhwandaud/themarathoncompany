@@ -56,6 +56,10 @@ angular.module('repcApp', ['ngFlash'])
         }
       }
 
+      $scope.clear = function(){
+        $scope.runner.search = "";
+      }
+
       $scope.change = function(runner){
         $scope.runner.search = "";
         if(runner.params == "icNo")
