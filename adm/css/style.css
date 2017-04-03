@@ -41,3 +41,13 @@
 body{
     padding-top: 100px;
 }
+
+.col-md-2{
+    padding-left:5px;
+    padding-right: 5px;
+}
+
+.col-md-12{
+    padding-left:5px;
+    padding-right: 5px;
+}

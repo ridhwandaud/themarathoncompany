@@ -13,20 +13,7 @@ if($doLogout == "true") {
     echo "<script>window.location = 'index.php';</script>";
 }
 ?>
-
-
-<!-- Spinner -->
-<!-- <div class="col-xs-12 col-sm-12 col-md-12 spinner-position">
-    <div id="loadAct" class="spinner" style="display: none;">
-        <div class="rect1"></div>
-        <div class="rect2"></div>
-        <div class="rect3"></div>
-        <div class="rect4"></div>
-        <div class="rect5"></div>
-    </div>
-</div> -->
-
-<!-- @todo navbar -->
+    
 <nav class="navbar navbar-inverse navbar-fixed-top">
 
   <div class="container">
@@ -157,29 +144,6 @@ if($doLogout == "true") {
            <label>Collector Contact No</label>
             <input type="text" ng-model="runner.obContact" class="form-control">
         </div> 
-        <!-- <hr class="colorgraph" id="midBar"> -->
-        <!-- <p class="bg-success" id="updtMsg">Record has been successfully updated.</p> -->
-        
-        <!-- <div id="colSelf">
-            <input style="margin-top: 40px;" id="collect" type="button" name="Collect" value="Collect Now" class="btn btn-lg btn-primary btn-block"> 
-        </div>
-        <div id="colOnbehalf">
-            <div class="form-group">
-                <label>OB Name:</label>
-                <input type='text' name='onname' id='obName' class="form-control">
-            </div>
-            <div class="form-group">
-                <label>OB IC:</label>
-                <input type='text' name='onic' id='obIc' class="form-control">
-            </div>
-            <div class="form-group">
-                <label>OB Contact No:</label>
-                <input type='text' name='oncontact' id='obContact' class="form-control">
-            </div>
-
-            <p class="bg-success" id="errorMsg" style="display: none;margin-top: 5px;color:red">Please check the required fields.</p>
-            <input id="collect2" type="button" name="Collect2" value="Collect On Behalf" class="btn btn-lg btn-primary btn-block">          
-        </div> -->
     </div>     
 </div>
 
