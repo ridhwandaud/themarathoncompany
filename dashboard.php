@@ -45,6 +45,7 @@ if($doLogout == "true") {
 
     <div id="navbar" class="collapse navbar-collapse">
         <form class="navbar-form navbar-right">
+            <a href="/all.php" class="btn btn-success">All</a>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#doLogout">Logout</button>
         </form>
     </div>
