@@ -102,6 +102,10 @@ angular.module('repcApp', ['ngFlash'])
       $scope.runner = {};
     }
   })
+
+  .controller('singleCtrl',function($scope,$http,Flash){
+      $http.get('single-search.php')
+  })
   .filter('statusFilter',function(){
     return function(status){
       if(status == 'N')
