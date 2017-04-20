@@ -1,8 +1,6 @@
 angular.module('repcApp', ['ngFlash'])
   .controller('dashboardCtrl', function($scope,$http,Flash) {
-      var parameter = "icNo";
-      var value = "970421085557";
-
+      
       $scope.runner = {}; 
       $scope.showIc = true;
 
