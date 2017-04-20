@@ -53,7 +53,7 @@ if($doLogout == "true") {
 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-                <a href="dashboard.php?doLogout=true" class="btn btn-primary btn-ok">Yes</a>
+                <a href="all.php?doLogout=true" class="btn btn-primary btn-ok">Yes</a>
 
             </div>
 
@@ -64,34 +64,29 @@ if($doLogout == "true") {
 </div>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <form action="" class="form-inline">
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Name" name="name">
-                    </div>
-                
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="IC Number" name="IcNo">
-                    </div>
-                
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Confirmation Number" name="CoNo">
-                    </div>
-
-                    <div class="form-group">
-                        <button class="btn btn-success">Search</button>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-danger">Search</button>
-                    </div>
+<div class="container" ng-controller="allCtrl">
+    <div class="col-md-12">
+        <form class="form-inline">
+            <div class="row">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" ng-model="runner.name">
                 </div>
-            </form>
-        </div>
+            
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="IC Number" ng-model="runner.icno">
+                </div>
+            
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Confirmation Number" ng-model="runner.cono">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" ng-click="searchRunners(runner)">Search</button>
+                    <button class="btn btn-danger" ng-click="clearForm()">Clear</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="row" style="padding-top: 50px">
+    <div style="padding-top: 50px">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -102,17 +97,11 @@ if($doLogout == "true") {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Ridhwan</td>
-                    <td>Not collected</td>
-                    <td>890328-08-5851</td>
-                    <td>BHW 381</td>
-                </tr>
-                <tr>
-                    <td>Sayang</td>
-                    <td>Collected</td>
-                    <td>890328-08-5851</td>
-                    <td>BHW 381</td>
+                <tr ng-repeat = "runner in runnersData">
+                    <td>{{runner.f_firstname}}</td>
+                    <td>{{runner.f_status}}</td>
+                    <td>{{runner.f_icno}}</td>
+                    <td>{{runner.f_confirm_id}}</td>
                 </tr>
             </tbody>
         </table>

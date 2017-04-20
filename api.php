@@ -81,7 +81,7 @@ if(!empty($sAction)) {
 
 						f_ob_contact
 
-					FROM dbm_marathon_users WHERE f_icno = '".$icNo."' OR f_confirm_id = '".$icNo."' OR f_firstname LIKE '".$icNo."%' 	" ; 
+					FROM dbm_marathon_users WHERE f_icno = '".$icNo."' OR f_confirm_id = '".$icNo."' OR f_firstname LIKE '%".$icNo."%' 	" ; 
 
 		} else if(!empty($confirmNo)) {
 

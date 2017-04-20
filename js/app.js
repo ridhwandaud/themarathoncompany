@@ -14,7 +14,7 @@ angular.module('repcApp', ['ngFlash'])
 
         if(runner.search == undefined)
         {
-          var message = '<strong>Please fill in the ic/cono</strong>';
+          var message = '<strong>Please fill in the ic/cono/name</strong>';
           var id = Flash.create('warning', message);
           return;
         }
@@ -86,6 +86,21 @@ angular.module('repcApp', ['ngFlash'])
 
       }
       
+  })
+
+  .controller('allCtrl',function($scope,$http,Flash){
+    $scope.runner = {};
+    $scope.searchRunners = function(runners){
+        
+        $http.post("search.php",runners)
+        .then(function(response){
+          console.log(response);
+          $scope.runnersData = response.data;
+        })
+    }
+    $scope.clearForm = function(){
+      $scope.runner = {};
+    }
   })
   .filter('statusFilter',function(){
     return function(status){
