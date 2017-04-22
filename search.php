@@ -21,9 +21,10 @@
 
 		echo $jsonOutput;
 
-	}else{
+	}else if($data['icno'] != "")
+	{
 
-		$sql = "SELECT * FROM dbm_marathon_users WHERE f_icno LIKE '%".$data['icno']."' OR f_confirm_id LIKE '".$data['cono']."'";
+		$sql = "SELECT * FROM dbm_marathon_users WHERE f_icno LIKE '%".$data['icno']."' OR f_confirm_id = '".$data['cono']."'";
 
 		$query = mysql_query($sql) or exit("Sql Error".mysql_error());
 
@@ -38,6 +39,22 @@
 
 		echo $jsonOutput;
 	}
-	
+	else
+	{
+		$sql = "SELECT * FROM dbm_marathon_users WHERE f_confirm_id = '".$data['cono']."'";
+
+		$query = mysql_query($sql) or exit("Sql Error".mysql_error());
+
+		$num_rows = mysql_num_rows($query);
+
+		while ($row = mysql_fetch_assoc($query))
+		{
+			$datas[] = $row;
+		}
+
+		$jsonOutput = json_encode($datas);
+
+		echo $jsonOutput;
+	}
 
 ?>
