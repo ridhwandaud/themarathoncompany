@@ -65,6 +65,7 @@ if($doLogout == "true") {
 
 
 <div class="container" ng-controller="allCtrl">
+    <flash-message></flash-message> 
     <div class="col-md-12">
         <form class="form-inline">
             <div class="row">

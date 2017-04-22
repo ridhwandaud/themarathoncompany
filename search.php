@@ -10,17 +10,6 @@
 
 		$query = mysql_query($sql) or exit("Sql Error".mysql_error());
 
-		$num_rows = mysql_num_rows($query);
-
-		while ($row = mysql_fetch_assoc($query))
-		{
-			$datas[] = $row;
-		}
-
-		$jsonOutput = json_encode($datas);
-
-		echo $jsonOutput;
-
 	}else if($data['icno'] != "")
 	{
 
@@ -28,16 +17,8 @@
 
 		$query = mysql_query($sql) or exit("Sql Error".mysql_error());
 
-		$num_rows = mysql_num_rows($query);
-
-		while ($row = mysql_fetch_assoc($query))
-		{
-			$datas[] = $row;
-		}
-
-		$jsonOutput = json_encode($datas);
-
-		echo $jsonOutput;
+		
+		
 	}
 	else
 	{
@@ -45,14 +26,45 @@
 
 		$query = mysql_query($sql) or exit("Sql Error".mysql_error());
 
-		$num_rows = mysql_num_rows($query);
+	}
+
+	$num_rows = mysql_num_rows($query);
+
+	if($num_rows > 0) {
 
 		while ($row = mysql_fetch_assoc($query))
 		{
 			$datas[] = $row;
 		}
 
-		$jsonOutput = json_encode($datas);
+		$response = array(
+
+			"statuscode" => 200,
+
+			"data" => $datas,
+
+			"message" => "Successful"
+
+		);
+
+		$jsonOutput = json_encode($response);
+
+		echo $jsonOutput;
+	}else{
+		
+		$response = array(
+
+			"statuscode" => 202,
+
+			"data" => NULL,
+
+			"message" => "Data not found."
+
+		);
+
+		
+
+		$jsonOutput = json_encode($response);
 
 		echo $jsonOutput;
 	}

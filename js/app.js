@@ -95,7 +95,16 @@ angular.module('repcApp', ['ngFlash'])
         $http.post("search.php",runners)
         .then(function(response){
           console.log(response);
-          $scope.runnersData = response.data;
+          if(response.data.statuscode == 200){
+            $scope.runnersData = response.data.data;
+            var message = '<strong>Users found</strong>';
+            var id = Flash.create('success', message);
+          }else{
+            $scope.runnersData = {};
+            var message = '<strong>User not found</strong>';
+            var id = Flash.create('danger', message);
+          }
+          
         })
     }
     $scope.clearForm = function(){
