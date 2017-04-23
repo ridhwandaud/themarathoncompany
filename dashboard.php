@@ -170,6 +170,18 @@ if($doLogout == "true") {
             <label>Payment Balance</label>
             <p>{{ runner.paymentBalance | currency : 'RM'}}</p>
         </div>
+        <div class="form-group">
+            <label>Collecter Name</label>
+            <p>{{ runner.obName}}</p>
+        </div>
+        <div class="form-group">
+            <label>Collecter IC</label>
+            <p>{{ runner.obIc}}</p>
+        </div>
+        <div class="form-group">
+            <label>Collecter Contact</label>
+            <p>{{ runner.obContact}}</p>
+        </div>
         <!-- <hr class="colorgraph" id="midBar"> -->
         <!-- <p class="bg-success" id="updtMsg">Record has been successfully updated.</p> -->
         

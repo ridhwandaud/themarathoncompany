@@ -104,6 +104,8 @@ angular.module('repcApp', ['ngFlash'])
             var message = '<strong>User not found</strong>';
             var id = Flash.create('danger', message);
           }
+
+          $scope.runner = {};
           
         })
     }
@@ -112,8 +114,30 @@ angular.module('repcApp', ['ngFlash'])
     }
   })
 
-  .controller('singleCtrl',function($scope,$http,Flash){
-      $http.get('single-search.php')
+  .controller('publicCtrl',function($scope,$http,Flash){
+      $scope.runner = {};
+      $scope.searchRunners = function(runners){
+          
+          $http.post("search.php",runners)
+          .then(function(response){
+            console.log(response);
+            if(response.data.statuscode == 200){
+              $scope.runnersData = response.data.data;
+              var message = '<strong>Users found</strong>';
+              var id = Flash.create('success', message);
+            }else{
+              $scope.runnersData = {};
+              var message = '<strong>User not found</strong>';
+              var id = Flash.create('danger', message);
+            }
+
+            $scope.runner = {};
+            
+          })
+      }
+      $scope.clearForm = function(){
+        $scope.runner = {};
+      }
   })
   .filter('statusFilter',function(){
     return function(status){

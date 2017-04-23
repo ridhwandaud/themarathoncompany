@@ -26,15 +26,8 @@ if($doLogout == "true") {
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">
-            TMC
+            Coway Run
         </a>
-    </div>
-
-    <div id="navbar" class="collapse navbar-collapse">
-        <form class="navbar-form navbar-right">
-        	<a href="/dashboard.php" class="btn btn-success">Single</a>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#doLogout">Logout</button>
-        </form>
     </div>
 
   </div>
@@ -64,21 +57,17 @@ if($doLogout == "true") {
 </div>
 
 
-<div class="container" ng-controller="allCtrl">
+<div class="container" ng-controller="publicCtrl">
     <flash-message></flash-message> 
     <div class="col-md-12">
         <form class="form-inline">
             <div class="row">
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <input type="text" class="form-control" placeholder="Name" ng-model="runner.name">
-                </div>
+                </div> -->
             
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="IC Number" ng-model="runner.icno">
-                </div>
-            
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Confirmation Number" ng-model="runner.cono">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success" ng-click="searchRunners(runner)">Search</button>
