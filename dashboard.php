@@ -3,14 +3,14 @@ require_once('header.php');
 
 //Check session
 if(!isset($_SESSION['user'])) {
-    echo "<script>location.href='index.php'</script>";
+    echo "<script>location.href='login.php'</script>";
 }
 
 $doLogout = isset($_REQUEST['doLogout']) ? $_REQUEST['doLogout'] : "false";
 
 if($doLogout == "true") {
     session_destroy();
-    echo "<script>window.location = 'index.php';</script>";
+    echo "<script>window.location = 'login.php';</script>";
 }
 ?>
 
@@ -38,7 +38,7 @@ if($doLogout == "true") {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/dashboard.php">
             TMC
         </a>
     </div>

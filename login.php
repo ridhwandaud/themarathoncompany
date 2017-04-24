@@ -98,7 +98,7 @@
 
       </div>  
 
-      <form name="form_login" method="post" action="index.php" role="form">
+      <form name="form_login" method="post" action="login.php" role="form">
 
         <fieldset>
 

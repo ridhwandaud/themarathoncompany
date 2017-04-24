@@ -1,17 +1,5 @@
 <?php
 require_once('header.php');
-
-//Check session
-if(!isset($_SESSION['user'])) {
-    echo "<script>location.href='index.php'</script>";
-}
-
-$doLogout = isset($_REQUEST['doLogout']) ? $_REQUEST['doLogout'] : "false";
-
-if($doLogout == "true") {
-    session_destroy();
-    echo "<script>window.location = 'index.php';</script>";
-}
 ?>
 <!-- @todo navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-blue">

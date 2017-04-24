@@ -25,7 +25,7 @@ if($doLogout == "true") {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/all.php">
             TMC
         </a>
     </div>
