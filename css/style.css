@@ -41,3 +41,20 @@
 body{
     padding-top: 100px;
 }
+
+.navbar-blue{
+    background-color: #38abe0;
+    border-color: #38abe0;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: white;
+}
+
+.navbar-inverse .navbar-toggle:hover {
+    background-color:#38abe0;
+}

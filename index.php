@@ -1,143 +1,101 @@
-<?php require_once('header.php'); ?>
-
-
-
 <?php
+require_once('header.php');
 
-    
+//Check session
+if(!isset($_SESSION['user'])) {
+    echo "<script>location.href='index.php'</script>";
+}
 
-    $isError = false;
+$doLogout = isset($_REQUEST['doLogout']) ? $_REQUEST['doLogout'] : "false";
 
-    $isEmptyField = false;
-
-    if (isset($_SESSION['user']) != "")
-
-    {   
-
-        echo "<script>location.href='dashboard.php'</script>";
-
-        exit;
-
-    }
-
-    
-
-    if (isset($_REQUEST['Submit'])) 
-
-    {
-
-      if($_REQUEST['pincode'] == "")
-
-      {
-
-        $isEmptyField = true;
-
-      }
-
-      else
-
-      {
-
-        //Prevent sql injection
-
-        $pincode = mysql_real_escape_string($_REQUEST['pincode']);
-
-        $cleanPincode = addslashes($pincode);
-        
-        $sql1 = "SELECT pincode FROM dbm_user WHERE pincode = '".$cleanPincode."' AND access_level = '0'";
-
-        $result = mysql_query($sql1) or exit("Sql Error".mysql_error());
-
-        
-
-        $num_rows = mysql_num_rows($result);
-
-        if($num_rows > 0)
-
-        {
-
-            $_SESSION['user'] = session_id(); 
-
-            session_write_close(); 
-
-            echo "<script>location.href='dashboard.php'</script>";
-
-            exit;
-
-        }
-
-        else
-
-        {
-
-          $isError = true;
-
-        }
-
-      }//End if($_REQUEST['pincode'] == "")
-
-    }//End if (isset($_REQUEST['Submit'])) 	
-
+if($doLogout == "true") {
+    session_destroy();
+    echo "<script>window.location = 'index.php';</script>";
+}
 ?>
+<!-- @todo navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-blue">
 
+  <div class="container">
 
-
-
-
-
-
-<div class="container">
-
-  <div class="row" style="margin-top:20px">
-
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-
-      <div class="col-xs-12 col-sm-12 col-md-12">
-
-        <div class="cpy-logo"></div>
-
-      </div>  
-
-      <form name="form_login" method="post" action="index.php" role="form">
-
-        <fieldset>
-
-          <h2>Enter PIN code</h2>
-
-          <hr class="colorgraph">
-
-          <div class="form-group">
-
-            <input type="password" name="pincode" id="password" class="form-control input-pincode" placeholder="PIN" autocomplete="off">
-
-            <?php if($isError) { ?> <div class="bg-danger">Wrong Pin Code. Please try again.</div><?php } ?>    
-
-            <?php if($isEmptyField) { ?> <div class="bg-danger">Enter pincode to proceed.</div><?php } ?>
-
-          </div>
-
-          <hr class="colorgraph">
-
-          <div class="row-enter">
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-
-              <input id="btn" type="submit" name="Submit" value="Enter" class="btn btn-lg btn-success btn-block">
-
-            </div>
-
-          </div>
-
-        </fieldset>
-
-      </form>
-
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            Coway Run
+        </a>
     </div>
 
   </div>
 
+</nav>
+
+<div class="modal fade" id="doLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+
+            <div class="modal-body">Are you sure to logout?</div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                <a href="all.php?doLogout=true" class="btn btn-primary btn-ok">Yes</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 
-
-<?php require_once('footer.php'); ?>
+<div class="container" ng-controller="publicCtrl">
+    <flash-message></flash-message>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img src="images/cover-logo.png" alt="" height="300px">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form class="form">
+                <div class="form-group" style="padding-top:30px">
+                    <label for="">Ic No/ Confirmation No</label>
+                    <input type="text" class="form-control" placeholder="Ic No/Confirmation No" ng-model="runner.icno">
+                    <p>Example: 891324885851</p>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" ng-click="searchRunners(runner)">Search</button>
+                    <button class="btn btn-danger" ng-click="clearForm()">Clear</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+    
+    <div style="padding-top: 50px">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Ic Number</th>
+                    <th>Confirmation No</th>
+                    <th>Bib number</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "runner in runnersData">
+                    <td>{{runner.f_firstname}}</td>
+                    <td>{{runner.f_status}}</td>
+                    <td>{{runner.f_icno}}</td>
+                    <td>{{runner.f_confirm_id}}</td>
+                    <td>{{runner.f_bib}}</td>
+                    <td>{{runner.f_tshirt_size}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
