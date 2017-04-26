@@ -69,7 +69,7 @@ if($doLogout == "true") {
     <div class="col-md-6 col-md-push-6">
         <form name="searchForm" ng-submit="checkForm(searchForm.$invalid)">
             <div class="col-md-12 text-center">
-                <img src="/images/cover-logo.png" class="img-responsive">
+                <img src="/repc/coway17/adm/images/cover-logo.png" class="img-responsive">
             </div>    
             <hr class="colorgraph">      
             <div class="form-group" ng-if="showIc == true">

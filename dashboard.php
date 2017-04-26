@@ -87,7 +87,7 @@ if($doLogout == "true") {
             </div>    
             <hr class="colorgraph">      
             <div class="form-group" ng-if="showIc == true">
-        		<label>Enter IC No or Confirmation No:</label>
+        		<label>Enter IC No or Confirmation No or Name:</label>
         		<input type="text" ng-model="runner.search" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
         	</div>
             <div class="row">
@@ -100,6 +100,13 @@ if($doLogout == "true") {
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                   <input id="btnClear" type="button" name="Clear" value="Clear" class="btn btn-lg btn-danger btn-block" ng-click="clear()">  
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="bib_number">
+                        <p>{{runner.bib}} {{runner.tShirtSize}}</p>
+                    </div>
                 </div>
             </div>  
         </form> 
