@@ -116,15 +116,17 @@ angular.module('repcApp', ['ngFlash'])
 
   .controller('publicCtrl',function($scope,$http,Flash){
       $scope.runner = {};
+      $scope.runners = false;
       $scope.searchRunners = function(runners){
           
-          $http.post("search.php",runners)
+          $http.post("public-search.php",runners)
           .then(function(response){
             console.log(response);
             if(response.data.statuscode == 200){
               $scope.runnersData = response.data.data;
               var message = '<strong>Users found</strong>';
               var id = Flash.create('success', message);
+              $scope.runners = true;
             }else{
               $scope.runnersData = {};
               var message = '<strong>User not found</strong>';

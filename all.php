@@ -32,7 +32,7 @@ if($doLogout == "true") {
 
     <div id="navbar" class="collapse navbar-collapse">
         <form class="navbar-form navbar-right">
-        	<a href="/dashboard.php" class="btn btn-success">Single</a>
+            <a href="/repc/coway17/dashboard.php" class="btn btn-success">Single</a>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#doLogout">Logout</button>
         </form>
     </div>

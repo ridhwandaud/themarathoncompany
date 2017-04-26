@@ -45,7 +45,7 @@ if($doLogout == "true") {
 
     <div id="navbar" class="collapse navbar-collapse">
         <form class="navbar-form navbar-right">
-            <a href="/all.php" class="btn btn-success">All</a>
+            <a href="/repc/coway17/all.php" class="btn btn-success">All</a>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#doLogout">Logout</button>
         </form>
     </div>
@@ -83,7 +83,7 @@ if($doLogout == "true") {
     <div class="col-md-6 col-md-push-6">
         <form name="searchForm" ng-submit="checkForm(searchForm.$invalid)">
             <div class="col-md-12 text-center">
-                <img src="/images/event-logo.png" class="img-responsive">
+                <img src="/repc/coway17/images/coway17-banner.jpg" class="img-responsive">
             </div>    
             <hr class="colorgraph">      
             <div class="form-group" ng-if="showIc == true">

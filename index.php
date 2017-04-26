@@ -8,7 +8,7 @@ require_once('header.php');
 
     <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            Coway Run
+            Coway Run 2017 Registration Status
         </a>
     </div>
 
@@ -42,17 +42,15 @@ require_once('header.php');
 <div class="container" ng-controller="publicCtrl">
     <flash-message></flash-message>
     <div class="row">
-        <div class="col-md-12 text-center">
-            <img src="images/cover-logo.png" alt="" height="300px">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <center><img src="images/cover-logo.png" alt="" style="max-height: 250px" class="img-responsive"></center>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <form class="form">
                 <div class="form-group" style="padding-top:30px">
-                    <label for="">Ic No/ Confirmation No</label>
-                    <input type="text" class="form-control" placeholder="Ic No/Confirmation No" ng-model="runner.icno">
-                    <p>Example: 891324885851</p>
+                    <label for="">Ic No / Confirmation No</label>
+                    <input type="text" class="form-control" placeholder="Ic No / Confirmation No" ng-model="runner.icno">
+                    <p>Example: 891324885851 (Ic No)</p>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success" ng-click="searchRunners(runner)">Search</button>
@@ -60,30 +58,60 @@ require_once('header.php');
                 </div>
             </form>
         </div>
+    </div>
+    <div class="row hidden-md hidden-lg">
+        
+        <div class="col-md-4 col-md-offset-4" ng-repeat="runner in runnersData">
+            <hr>
+            <div class="form-group">
+                <label>Name</label>
+                <p class="form-control">{{runner.f_firstname}}</p>
+            </div>
+            <div class="form-group">
+                <label>Bib Number</label>
+                <p class="form-control">{{runner.f_bib}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tshirt Size</label>
+                <p class="form-control">{{runner.f_tshirt_size}}</p>
+            </div>
+            <div class="form-group">
+                <label>Confirmation ID</label>
+                <p class="form-control">{{runner.f_confirm_id}}</p>
+            </div>
+            <div class="form-group">
+                <label>IC Number</label>
+                <p class="form-control">{{runner.f_icno}}</p>
+            </div>
+        </div>
     </div> 
     
-    <div style="padding-top: 50px">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Ic Number</th>
-                    <th>Confirmation No</th>
-                    <th>Bib number</th>
-                    <th>Size</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat = "runner in runnersData">
-                    <td>{{runner.f_firstname}}</td>
-                    <td>{{runner.f_status}}</td>
-                    <td>{{runner.f_icno}}</td>
-                    <td>{{runner.f_confirm_id}}</td>
-                    <td>{{runner.f_bib}}</td>
-                    <td>{{runner.f_tshirt_size}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="hidden-sm hidden-xs" style="padding-top: 50px" ng-show="runners">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Ic Number</th>
+                        <th>Confirmation No</th>
+                        <th>Bib number</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat = "runner in runnersData">
+                        <td>{{runner.f_firstname}}</td>
+                        <td>{{runner.f_icno}}</td>
+                        <td>{{runner.f_confirm_id}}</td>
+                        <td>{{runner.f_bib}}</td>
+                        <td>{{runner.f_tshirt_size}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
+    </div>
+
+    <div class="row">
+        
     </div>
 </div>

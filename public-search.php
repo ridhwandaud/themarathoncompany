@@ -4,10 +4,10 @@
 
 	$data = json_decode(file_get_contents('php://input'), true);
 
-	($data['icno'] != "")
+	if($data['icno'] != "")
 	{
 
-		$sql = "SELECT * FROM dbm_marathon_users WHERE f_icno LIKE '%".$data['icno']."' ";
+		$sql = "SELECT * FROM dbm_marathon_users WHERE f_confirm_id = '".$data['icno']."' OR f_icno LIKE '%".$data['icno']."' ";
 
 		$query = mysql_query($sql) or exit("Sql Error".mysql_error());
 	}
