@@ -83,6 +83,36 @@ angular.module('repcApp', ['ngFlash'])
         })
 
       }
+
+      $scope.updateData = function(runner)
+      {
+        $http.post("api.php?sAction=updtData",runner)
+        .then(function(response){
+
+          if(response.data.statuscode == 200)
+          {
+            $scope.successMessage = "Runner data successfully updated";
+
+            var message = '<strong>' + $scope.successMessage + '</strong>';
+            var id = Flash.create('success', message);
+
+            if($scope.runner.status == "N")
+            {
+              $scope.collected = false;
+              $scope.runner.collect = "self";
+            }
+
+          }else{
+            $scope.errorMessage = response.data.message;
+            var message = '<strong>Runner data failed to update</strong>';
+            var id = Flash.create('danger', message);
+          }
+
+        },function(error){
+          console.log('error : ',error);
+        })
+
+      }
       
   })
   .filter('statusFilter',function(){

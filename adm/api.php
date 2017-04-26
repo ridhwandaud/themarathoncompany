@@ -24,13 +24,17 @@ $obName = isset($_REQUEST['obName']) ? $_REQUEST['obName'] : "";
 $obIc = isset($_REQUEST['obIc']) ? $_REQUEST['obIc'] : "";
 $obContact  = isset($_REQUEST['obContact']) ? $_REQUEST['obContact'] : "";
 
+//request payload
+$data = json_decode(file_get_contents('php://input'), true);
+
+
 if(!empty($sAction)) {
     
     if($sAction == 'getData') {
 		$arrData = array();
 		
 		if(!empty($icNo)) {
-			$sql = "SELECT * FROM dbm_marathon_users WHERE f_icNo = '".$icNo."'"; 
+			$sql = "SELECT * FROM dbm_marathon_users WHERE f_icno = '".$icNo."' OR f_confirm_id = '".$icNo."' OR f_firstname LIKE '%".$icNo."%' "; 
 		}
 
 		if(!empty($confirmNo)) {
@@ -78,21 +82,21 @@ if(!empty($sAction)) {
 		}    
         
     } else if($sAction == "updtData") {
-        if($icNo) {
+        if($data["icNo"]) {
             $sql = "UPDATE dbm_marathon_users SET
-								f_firstname = '$sFirstName',
-								f_lastname = '$sLastName',
-								f_category = '$sCategory',
-								f_confirm_id = '$confirmNo',
-								f_gender = '$sGender',
-								f_tshirt_size = '$sTshirtSize',
-								f_bib = '$sBib',
-								f_payment_balance = '$sPaymentBalance',
-								f_status = '$sStatus',
-								f_ob_name = '$obName',
-								f_ob_ic = '$obIc',
-								f_ob_contact = '$obContact'
-						  WHERE f_icno = '".$icNo."'";
+								f_firstname = '".$data["firstname"]."',
+								f_lastname = '-',
+								f_category = '".$data["category"]."',
+								f_confirm_id = '".$data["confirmId"]."',
+								f_gender = '".$data["gender"]."',
+								f_tshirt_size = '".$data["tShirtSize"]."',
+								f_bib = '".$data["bib"]."',
+								f_payment_balance = '".$data["paymentBalance"]."',
+								f_status = '".$data["status"]."',
+								f_ob_name = '".$data["obName"]."',
+								f_ob_ic = '".$data["obIc"]."',
+								f_ob_contact = '".$data["obContact"]."'
+						  WHERE f_icno = '".$data["icNo"]."'";
             $query = mysql_query($sql) or exit("Sql Error".mysql_error());
             
 				if(mysql_affected_rows() > 0) {

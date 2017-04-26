@@ -69,11 +69,11 @@ if($doLogout == "true") {
     <div class="col-md-6 col-md-push-6">
         <form name="searchForm" ng-submit="checkForm(searchForm.$invalid)">
             <div class="col-md-12 text-center">
-                <img src="/images/logo.png">
+                <img src="/images/cover-logo.png" class="img-responsive">
             </div>    
             <hr class="colorgraph">      
             <div class="form-group" ng-if="showIc == true">
-        		<label>Enter IC No or Confirmation No:</label>
+        		<label>Enter IC No or Confirmation No or Name:</label>
         		<input type="text" ng-model="runner.search" class="form-control" placeholder="eg: 700101010101" autocomplete="off" maxlength="30" >
         	</div>
             <div class="row">
@@ -143,6 +143,9 @@ if($doLogout == "true") {
         <div class="form-group" >
            <label>Collector Contact No</label>
             <input type="text" ng-model="runner.obContact" class="form-control">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" ng-click="updateData(runner)">Update Data</button>
         </div> 
     </div>     
 </div>
